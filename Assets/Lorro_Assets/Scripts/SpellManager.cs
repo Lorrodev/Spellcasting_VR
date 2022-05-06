@@ -16,7 +16,7 @@ public class SpellManager : MonoBehaviour
     private Transform cam;
 
     private bool DEBUG_isInvestigating = false;
-    private List<Vector3> DEBUG_suspectsPoints;
+    public List<Vector3> DEBUG_suspectsPoints;
     private Dictionary<string, Vector3> DEBUG_suspectsBounds;
 
     // Start is called before the first frame update
@@ -94,14 +94,19 @@ public class SpellManager : MonoBehaviour
                 castableRune.transform.position += offset;
 
                 //Rotate
-                //Project the up vector of the HMD to the plane defined by right and up of the wand (-> cast point)
-                //Since only the normal of the plane is needed the plane does not need to be built and the castPoint.normal vector is enough
-                Vector3 projectedCamUp = Vector3.ProjectOnPlane(cam.up, castPoint.transform.forward);
-                Quaternion rotation = Quaternion.LookRotation(castPoint.transform.forward, projectedCamUp);
+                Quaternion rotation;
 
-                //same as above but projecting castPoint.forward to cam instead
-                Vector3 projectedCastPointForward = Vector3.ProjectOnPlane(castPoint.transform.forward, cam.up);
-                //Quaternion rotation = Quaternion.LookRotation(projectedCastPointForward, cam.up);
+                if (!castableRune.useCameraForwardToAlign)
+                {
+                    //Project the up vector of the HMD to the plane defined by right and up of the wand (-> cast point)
+                    //Since only the normal of the plane is needed the plane does not need to be built and the castPoint.normal vector is enough
+                    Vector3 projectedCamUp = Vector3.ProjectOnPlane(cam.up, castPoint.transform.forward);
+                    rotation = Quaternion.LookRotation(castPoint.transform.forward, projectedCamUp);
+                }
+                else
+                {
+                    rotation = Quaternion.LookRotation(cam.forward, cam.up);
+                }
 
                 castableRune.transform.rotation = rotation;
 

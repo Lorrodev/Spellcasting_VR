@@ -7,6 +7,7 @@ public class Rune : MonoBehaviour
 {
     public List<Vector3> runePoints = new List<Vector3>();
     public float deltaThreshold;
+    public bool useCameraForwardToAlign = false;
 
     private Dictionary<string, Vector3> corners;
 

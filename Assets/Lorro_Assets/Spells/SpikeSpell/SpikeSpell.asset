@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ff184b298feaf2478d0272744c2db2f, type: 3}
+  m_Name: SpikeSpell
+  m_EditorClassIdentifier: 
+  spellName: Spike Spell
+  runes:
+  - {fileID: 6780329847548705449, guid: 2ac77686555168f49bd40dc1e26c5e62, type: 3}
+  - {fileID: 6802619794946998053, guid: 46bc54ba9b3df55409522c0f3f3d7104, type: 3}
+  - {fileID: 6442946586207949171, guid: 5082635565c7cf04181bb2b540eb76b4, type: 3}
+  - {fileID: 6442946586207949171, guid: c9e351051b879fa4eb612bcc93f53469, type: 3}
+  spellScriptObject: {fileID: 4920746244280831230, guid: 4c52ed4f986b75e45aaa5ecabff3161d,
+    type: 3}
