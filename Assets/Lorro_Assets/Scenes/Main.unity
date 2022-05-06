@@ -2609,10 +2609,5 @@ PrefabInstance:
       propertyPath: m_Name
       value: ViveTracker
       objectReference: {fileID: 0}
-    - target: {fileID: 8025933131300935648, guid: 29af810e3f85cc74882c104e73d6b858,
-        type: 3}
-      propertyPath: samplesPerSecond
-      value: 20
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 29af810e3f85cc74882c104e73d6b858, type: 3}

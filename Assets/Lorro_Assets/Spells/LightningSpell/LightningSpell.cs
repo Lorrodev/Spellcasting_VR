@@ -35,14 +35,7 @@ public class LightningSpell : Spell
         
         if(Physics.Raycast(castPoint.transform.position, castPoint.transform.forward, out hit))
         {
-            if (hit.collider.gameObject.CompareTag("Floor"))
-            {
-                transform.position = hit.point + Vector3.up * 30;
-            }
-            else
-            {
-                Destroy(gameObject);
-            }
+            transform.position = hit.point + Vector3.up * 30;
         }
         else
         {

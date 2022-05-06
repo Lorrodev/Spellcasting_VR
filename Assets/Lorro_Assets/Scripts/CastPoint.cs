@@ -67,7 +67,8 @@ public class CastPoint : MonoBehaviour
         avgMag = avgMag > 0.01 ? avgMag : 0.01f;*/
 
         //Setting fixed avgMag for now
-        float avgMag = 0.02f;
+        //float avgMag = 0.02f;
+        float avgMag = 0.01f;
 
         //Find points with mag above avg (= points of interest)
         //List<Vector3> pointsOfInterest = new List<Vector3>();
@@ -98,7 +99,7 @@ public class CastPoint : MonoBehaviour
                 }
 
                 //If point is not actually interesting but close to POIs
-                if (pointsOfInterest.Count > 5 && pointsSinceLastPOI < 5)
+                if (pointsOfInterest.Count > 5 && pointsSinceLastPOI < 12)
                 {
                     pointsOfInterest.Add(pointCache[p]);
                 }
@@ -116,6 +117,8 @@ public class CastPoint : MonoBehaviour
                 if (noChangeInPointsOfInterestForNumUpdates > 8 && possibleRuneDetected == false)
                 {
                     consistentPointsOfInterest = new List<Vector3>(pointsOfInterest);
+
+                    pointCache.Clear();
 
                     possibleRuneDetected = true;
                     currentPossibleRunePickedUp = false;

@@ -14,9 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spellName: Spike Spell
   runes:
-  - {fileID: 6780329847548705449, guid: 2ac77686555168f49bd40dc1e26c5e62, type: 3}
-  - {fileID: 6802619794946998053, guid: 46bc54ba9b3df55409522c0f3f3d7104, type: 3}
-  - {fileID: 6442946586207949171, guid: 5082635565c7cf04181bb2b540eb76b4, type: 3}
-  - {fileID: 6442946586207949171, guid: c9e351051b879fa4eb612bcc93f53469, type: 3}
+  - {fileID: 5578942346373595469, guid: 29ec6a1e341358844a19f02e43db7fd3, type: 3}
+  - {fileID: 5507579819171675785, guid: edcca05a69d426e4ead1dc29ab803810, type: 3}
+  - {fileID: 8248861239979880562, guid: 1414e99dfee9dd5459baedbc5b09126d, type: 3}
   spellScriptObject: {fileID: 4920746244280831230, guid: 4c52ed4f986b75e45aaa5ecabff3161d,
     type: 3}

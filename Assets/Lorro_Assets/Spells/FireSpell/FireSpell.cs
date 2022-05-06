@@ -10,17 +10,20 @@ public class FireSpell : Spell
     private Vector3 direction;
     private SphereCollider sc;
 
+    private Vector3 origin;
+
     // Start is called before the first frame update
     void Start()
     {
         sc = GetComponent<SphereCollider>();
-        sc.isTrigger = true;
+        //sc.isTrigger = true;
     }
 
     // Update is called once per frame
     void Update()
     {
         transform.position += direction * Time.deltaTime * speed;
+        transform.position += new Vector3((Random.value - 0.5f) * Time.deltaTime * (speed/5), (Random.value - 0.5f) * Time.deltaTime * (speed / 5), (Random.value - 0.5f) * Time.deltaTime * (speed / 5));
 
         TTL -= Time.deltaTime;
 
@@ -39,5 +42,6 @@ public class FireSpell : Spell
         //Init
         transform.position = castPoint.transform.position;
         direction = castPoint.transform.forward;
+        origin = transform.position;
     }
 }

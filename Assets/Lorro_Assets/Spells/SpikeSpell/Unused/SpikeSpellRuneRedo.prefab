@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7448693483480643866}
   - component: {fileID: 3841617861679977159}
   m_Layer: 0
-  m_Name: SpikeSpellRuneRedo2
+  m_Name: SpikeSpellRuneRedo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

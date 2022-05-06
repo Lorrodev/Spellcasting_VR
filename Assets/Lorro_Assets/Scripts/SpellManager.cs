@@ -66,8 +66,6 @@ public class SpellManager : MonoBehaviour
         //Possible to link runes with spell object without deleting them every time?
         GameObject runeContainer = new GameObject("RuneContainer");
 
-        Debug.ClearDeveloperConsole();
-
         for (int c = 0; c < castableSpells.Count; c++)
         {
             SpellObject castableSpell = castableSpells[c];
@@ -158,7 +156,7 @@ public class SpellManager : MonoBehaviour
                     {
                         mostLikelyToCastSpellGapToDeltaThreshold = gapTopDeltaThreshold;
                         mostLikelyToCastSpell = castableSpell;
-                        Debug.Log("Expecting " + castableSpell.name + " from " + castableRune.gameObject.name + " to be meant | Gap to delta: "+mostLikelyToCastSpellGapToDeltaThreshold);
+                        Debug.Log("Might be " + castableSpell.name + " from " + castableRune.gameObject.name + " | Gap to delta: "+mostLikelyToCastSpellGapToDeltaThreshold);
                     }
                 }
             }
@@ -174,12 +172,15 @@ public class SpellManager : MonoBehaviour
 
             spell.Execute();
         }
+        else
+        {
+            Debug.Log("Not likely a spell");
+        }
 
         if (!debugRunes)
         {
             Destroy(runeContainer);
         }
-        Debug.Log("Ready for next Rune");
     }
 
     public GameObject GetCastPoint()
