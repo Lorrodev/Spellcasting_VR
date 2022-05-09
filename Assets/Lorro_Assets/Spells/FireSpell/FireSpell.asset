@@ -17,5 +17,5 @@ MonoBehaviour:
   - {fileID: 8495147900991016092, guid: 69a7bea4c8119744587c47d774c68d83, type: 3}
   - {fileID: 3283080405534644569, guid: 1ccdf8f729484ff4194991eee8649ec7, type: 3}
   - {fileID: 6977127405190352978, guid: 41bfb220a56bbd9489ef88046bd40ac4, type: 3}
-  spellScriptObject: {fileID: 4671413680861472010, guid: 49f91a0b1d21b2c4282f70717ccd81b8,
+  spellScriptObject: {fileID: 4671413680861472010, guid: 0d9d7b307798e0b4384cecfb377de683,
     type: 3}
