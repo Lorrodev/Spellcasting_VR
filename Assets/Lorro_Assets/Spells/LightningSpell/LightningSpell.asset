@@ -16,5 +16,6 @@ MonoBehaviour:
   runes:
   - {fileID: 3282431594168982674, guid: 0932b0e82f115f8468cf1524dae81a07, type: 3}
   - {fileID: 4701962021378192034, guid: 8a1630e18148718469a19e95e947f526, type: 3}
+  - {fileID: 8300821769808085353, guid: a068af29f2c577847bd95f6e4e203149, type: 3}
   spellScriptObject: {fileID: 1197939578098623589, guid: 1225bf4ce247269419e3cae1e325ffa6,
     type: 3}

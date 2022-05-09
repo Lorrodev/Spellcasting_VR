@@ -142,9 +142,10 @@ public class SpellManager : MonoBehaviour
 
                 delta /= biggerList.Count;
 
-                float deltaMultiplier = scaleFactor > 1 ? scaleFactor : 1 / scaleFactor;
+                //float deltaMultiplier = scaleFactor > 1 ? scaleFactor : 1 / scaleFactor;
+                //delta *= 100 * deltaMultiplier;
 
-                delta *= 100 * deltaMultiplier;
+                delta *= 100;
 
                 Debug.Log("Delta for "+castableRune.gameObject.name+" is " + delta + " / threshold is : "+castableRune.deltaThreshold);
 

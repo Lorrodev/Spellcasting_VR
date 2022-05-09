@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class LightningSpell : Spell
 {
-    public float speed = 5f;
+    public GameObject effect;
+    public List<AudioClip> castSounds;
+
+    private AudioSource ac;
 
     // Start is called before the first frame update
     void Start()
@@ -14,13 +17,9 @@ public class LightningSpell : Spell
     // Update is called once per frame
     void Update()
     {
-        if (transform.position.y > 0)
+        if (!ac.isPlaying)
         {
-            transform.position += Vector3.down * Time.deltaTime * speed;
-        }
-        else
-        {
-            //Destroy(gameObject);
+            Destroy(gameObject);
         }
     }
 
@@ -35,7 +34,11 @@ public class LightningSpell : Spell
         
         if(Physics.Raycast(castPoint.transform.position, castPoint.transform.forward, out hit))
         {
-            transform.position = hit.point + Vector3.up * 30;
+            transform.position = hit.point;
+            Instantiate(effect, transform);
+
+            ac = GetComponent<AudioSource>();
+            ac.PlayOneShot(castSounds[Random.Range(0, castSounds.Count)]);
         }
         else
         {

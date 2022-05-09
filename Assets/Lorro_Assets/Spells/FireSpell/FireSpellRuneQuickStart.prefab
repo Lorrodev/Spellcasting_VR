@@ -75,3 +75,4 @@ MonoBehaviour:
   - {x: -0.051685452, y: -0.071208954, z: 0.045787536}
   - {x: -0.04959929, y: -0.07063037, z: 0.0458029}
   deltaThreshold: 28
+  useCameraForwardToAlign: 0
