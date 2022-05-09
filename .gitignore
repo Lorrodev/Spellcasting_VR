@@ -70,3 +70,10 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+
+
+#AssetPacks
+/[Aa]ssets/PolygonNature/*
+/[Aa]ssets/RPG\ Magic\ Sound\ Effects\ Pack\ 3\ \[ELEMENTAL\]/*
+/[Aa]ssets/PolygonParticleFX/*
+
