@@ -7,6 +7,8 @@ public class FireSpell : Spell
     public float speed = 5f;
     public float TTL = 10;
 
+    public GameObject explosionEffect;
+
     public List<AudioClip> castSounds;
     public AudioClip flightSound;
     public List<AudioClip> impactSounds;
@@ -14,20 +16,32 @@ public class FireSpell : Spell
     private Vector3 direction;
     private SphereCollider sc;
     private AudioSource ac;
+    private ParticleSystem ps;
+    private Light lt;
 
-    private Vector3 origin;
+    private bool collided = false;
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
+        ac = GetComponent<AudioSource>();
+        sc = GetComponent<SphereCollider>();
+        ps = GetComponent<ParticleSystem>();
+        lt = GetComponent<Light>();
 
+        sc.isTrigger = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.position += direction * Time.deltaTime * speed;
-        //transform.position += new Vector3((Random.value - 0.5f) * Time.deltaTime * (speed/5), (Random.value - 0.5f) * Time.deltaTime * (speed / 5), (Random.value - 0.5f) * Time.deltaTime * (speed / 5));
+        if (!collided)
+        {
+            transform.position += direction * Time.deltaTime * speed;
+        }
+        else
+        {
+            lt.intensity -= Time.deltaTime;
+        }
 
         TTL -= Time.deltaTime;
 
@@ -39,9 +53,6 @@ public class FireSpell : Spell
 
     public override void Execute()
     {
-        ac = GetComponent<AudioSource>();
-        sc = GetComponent<SphereCollider>();
-
         SpellManager spellManager = GameObject.Find("SpellManager").GetComponent<SpellManager>();
 
         GameObject castPoint = spellManager.GetCastPoint();
@@ -49,9 +60,25 @@ public class FireSpell : Spell
         //Init
         transform.position = castPoint.transform.position;
         direction = castPoint.transform.forward;
-        origin = transform.position;
 
         ac.PlayOneShot(castSounds[Random.Range(0, castSounds.Count)]);
         ac.PlayOneShot(flightSound);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        ps.Stop();
+        Instantiate(explosionEffect, transform);
+
+        AudioClip sound = impactSounds[Random.Range(0, castSounds.Count)];
+
+        ac.Stop();
+
+        ac.spatialBlend = 0.5f;
+        ac.PlayOneShot(sound);
+
+        TTL = sound.length;
+
+        collided = true;
     }
 }

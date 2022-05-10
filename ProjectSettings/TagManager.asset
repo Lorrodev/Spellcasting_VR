@@ -8,6 +8,7 @@ TagManager:
   - FxTemporaire
   - CastPoint
   - Floor
+  - Fire
   layers:
   - Default
   - TransparentFX

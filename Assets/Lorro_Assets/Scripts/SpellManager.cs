@@ -50,7 +50,8 @@ public class SpellManager : MonoBehaviour
         SpellObject mostLikelyToCastSpell = null;
 
         //The gap to the delta threshold that is needed to cast the spell sucessfully (= certainty that user means this spell)
-        float mostLikelyToCastSpellGapToDeltaThreshold = 0f;
+        //float mostLikelyToCastSpellGapToDeltaThreshold = 0f;
+        float mostLikelyToCastSpellDelta = Mathf.Infinity;
 
         if (recordRunes)
         {
@@ -142,23 +143,30 @@ public class SpellManager : MonoBehaviour
 
                 delta /= biggerList.Count;
 
-                //float deltaMultiplier = scaleFactor > 1 ? scaleFactor : 1 / scaleFactor;
-                //delta *= 100 * deltaMultiplier;
-
-                delta *= 100;
+                float deltaMultiplier = scaleFactor > 1 ? scaleFactor : 1 / scaleFactor;
+                delta *= 100 * deltaMultiplier;
 
                 Debug.Log("Delta for "+castableRune.gameObject.name+" is " + delta + " / threshold is : "+castableRune.deltaThreshold);
 
                 if (delta < castableRune.deltaThreshold)
                 {
-                    float gapTopDeltaThreshold = delta - castableRune.deltaThreshold;
+                    //float gapTopDeltaThreshold = delta - castableRune.deltaThreshold;
+
+                    if (delta < mostLikelyToCastSpellDelta)
+                    {
+                        mostLikelyToCastSpellDelta = delta;
+                        mostLikelyToCastSpell = castableSpell;
+                        Debug.Log("Might be " + castableSpell.name + " from " + castableRune.gameObject.name + " | Delta: " + mostLikelyToCastSpellDelta);
+                    }
+
+                    /*float gapTopDeltaThreshold = delta - castableRune.deltaThreshold;
 
                     if (gapTopDeltaThreshold < mostLikelyToCastSpellGapToDeltaThreshold)
                     {
                         mostLikelyToCastSpellGapToDeltaThreshold = gapTopDeltaThreshold;
                         mostLikelyToCastSpell = castableSpell;
-                        Debug.Log("Might be " + castableSpell.name + " from " + castableRune.gameObject.name + " | Gap to delta: "+mostLikelyToCastSpellGapToDeltaThreshold);
-                    }
+                        Debug.Log("Might be " + castableSpell.name + " from " + castableRune.gameObject.name + " | Gap to delta: " + mostLikelyToCastSpellGapToDeltaThreshold);
+                    }*/
                 }
             }
         }
