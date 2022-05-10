@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class SpikeSpell : Spell
 {
+    public GameObject visual;
+
+    private float TTL = 7f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -13,14 +17,20 @@ public class SpikeSpell : Spell
     // Update is called once per frame
     void Update()
     {
-        if (transform.position.y < 0)
+        TTL -= Time.deltaTime;
+
+        if (TTL <= 0)
         {
-            transform.position += Vector3.up * Time.deltaTime * 2f;
+            Destroy(gameObject);
         }
     }
 
     public override void Execute()
     {
-        transform.position = Camera.main.transform.position + Camera.main.transform.forward * 1.5f - Vector3.up * 2f;
+        Camera cam = Camera.main;
+        transform.position = new Vector3(cam.transform.position.x, 0, cam.transform.position.z);
+
+        GameObject visualFX = Instantiate(visual, transform);
+        visualFX.transform.LookAt(transform.position + new Vector3(cam.transform.forward.x, 0, cam.transform.forward.z), Vector3.up);
     }
 }

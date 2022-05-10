@@ -1,0 +1,84 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6977127405190352978
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6981162649933053601}
+  - component: {fileID: 4699002337512963278}
+  m_Layer: 0
+  m_Name: FireSpellRuneRedo
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6981162649933053601
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6977127405190352978}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4699002337512963278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6977127405190352978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2035c2f03e4d58945a8d863d074901ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  runePoints:
+  - {x: -0.013987541, y: -0.10860586, z: 0.052942798}
+  - {x: 0.03001678, y: -0.1265983, z: 0.06310186}
+  - {x: 0.083480716, y: -0.12091148, z: 0.07155046}
+  - {x: 0.17020667, y: -0.07510233, z: 0.07865341}
+  - {x: 0.25788355, y: 0.0056738853, z: 0.06823401}
+  - {x: 0.3036667, y: 0.1122241, z: 0.045473903}
+  - {x: 0.30615246, y: 0.22659552, z: 0.014789537}
+  - {x: 0.27705312, y: 0.32765138, z: -0.020932406}
+  - {x: 0.20560908, y: 0.3962146, z: -0.047036976}
+  - {x: 0.11622965, y: 0.4381131, z: -0.06926522}
+  - {x: 0.009299517, y: 0.43184686, z: -0.078653425}
+  - {x: -0.10202217, y: 0.3690349, z: -0.07599437}
+  - {x: -0.20387352, y: 0.2595328, z: -0.06903966}
+  - {x: -0.28426325, y: 0.09511435, z: -0.056952715}
+  - {x: -0.30615234, y: -0.066542745, z: -0.039507493}
+  - {x: -0.2362696, y: -0.283444, z: -0.008728877}
+  - {x: -0.079864144, y: -0.4381131, z: 0.008831188}
+  - {x: 0.087946534, y: -0.4369725, z: 0.028685123}
+  - {x: 0.15862656, y: -0.39023763, z: 0.0411689}
+  - {x: 0.21548092, y: -0.33360583, z: 0.04666984}
+  - {x: 0.26051617, y: -0.26981664, z: 0.050824896}
+  - {x: 0.2854663, y: -0.19529867, z: 0.051901266}
+  - {x: 0.2952652, y: -0.12507206, z: 0.050329298}
+  - {x: 0.29159832, y: -0.06654018, z: 0.047582954}
+  - {x: 0.27227724, y: -0.019336104, z: 0.048672944}
+  - {x: 0.24256611, y: 0.015499234, z: 0.05283691}
+  - {x: 0.20795012, y: 0.042606473, z: 0.057878867}
+  - {x: 0.16624522, y: 0.05736518, z: 0.062296912}
+  - {x: 0.122855425, y: 0.063863754, z: 0.06609513}
+  - {x: 0.07779467, y: 0.058137417, z: 0.07076819}
+  - {x: 0.03595209, y: 0.045876265, z: 0.07202664}
+  - {x: -0.0031923056, y: 0.023925424, z: 0.07373853}
+  - {x: -0.033618927, y: 0.0033769608, z: 0.0736832}
+  - {x: -0.05671537, y: -0.014556289, z: 0.071701765}
+  - {x: -0.071505666, y: -0.023971021, z: 0.0691095}
+  deltaThreshold: 28
+  useCameraForwardToAlign: 0

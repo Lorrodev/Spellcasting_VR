@@ -1,0 +1,78 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3283080405534644569
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6060029404368575689}
+  - component: {fileID: 1464454979188433673}
+  m_Layer: 0
+  m_Name: FireSpellRuneQuickStart
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6060029404368575689
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3283080405534644569}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1464454979188433673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3283080405534644569}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2035c2f03e4d58945a8d863d074901ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  runePoints:
+  - {x: 0.06378615, y: -0.34826726, z: 0.016251288}
+  - {x: 0.11204326, y: -0.28569168, z: 0.04110249}
+  - {x: 0.16626048, y: -0.18943703, z: 0.0678956}
+  - {x: 0.22620845, y: -0.06583637, z: 0.08131925}
+  - {x: 0.26567197, y: 0.07989848, z: 0.07202027}
+  - {x: 0.27681947, y: 0.20738184, z: 0.046191953}
+  - {x: 0.2560581, y: 0.30498588, z: 0.023308672}
+  - {x: 0.20241368, y: 0.3779428, z: -0.0028519556}
+  - {x: 0.13394892, y: 0.41856802, z: -0.029461116}
+  - {x: 0.053044677, y: 0.42251396, z: -0.0514701}
+  - {x: -0.038163066, y: 0.37798238, z: -0.06512779}
+  - {x: -0.12612343, y: 0.28587115, z: -0.06767883}
+  - {x: -0.20773745, y: 0.15048385, z: -0.06923675}
+  - {x: -0.26943254, y: -0.031220078, z: -0.07501473}
+  - {x: -0.27681947, y: -0.23449332, z: -0.08131925}
+  - {x: -0.18672168, y: -0.38277125, z: -0.066186495}
+  - {x: -0.054080486, y: -0.42251408, z: -0.029458456}
+  - {x: 0.03199482, y: -0.38927543, z: 0.0038048252}
+  - {x: 0.13819826, y: -0.27290988, z: 0.043184496}
+  - {x: 0.20337701, y: -0.14162439, z: 0.051894777}
+  - {x: 0.21052313, y: -0.042376637, z: 0.049470328}
+  - {x: 0.17523217, y: 0.016323924, z: 0.04810437}
+  - {x: 0.117323995, y: 0.04153347, z: 0.048321314}
+  - {x: 0.05097854, y: 0.031535506, z: 0.047942303}
+  - {x: -0.0069806576, y: -0.012260318, z: 0.049979262}
+  - {x: -0.052972317, y: -0.053622186, z: 0.047462128}
+  - {x: -0.063242674, y: -0.06771916, z: 0.04392863}
+  - {x: -0.051685452, y: -0.071208954, z: 0.045787536}
+  - {x: -0.04959929, y: -0.07063037, z: 0.0458029}
+  deltaThreshold: 28
+  useCameraForwardToAlign: 0
