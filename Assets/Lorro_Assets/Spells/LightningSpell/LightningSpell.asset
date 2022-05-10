@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: LightningSpell
   m_EditorClassIdentifier: 
   spellName: Lightning Spell
-  runes: []
+  runes:
+  - {fileID: 2024105689238880164, guid: 0950d111f1f6bb34db0e885911e3c461, type: 3}
+  - {fileID: 6387344803750042159, guid: 7d5eb7b0a659fdd419cf71f04e538e56, type: 3}
   spellScriptObject: {fileID: 1197939578098623589, guid: 1225bf4ce247269419e3cae1e325ffa6,
     type: 3}

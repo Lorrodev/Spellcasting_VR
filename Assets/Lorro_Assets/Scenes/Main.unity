@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 0.4
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: ed1387202b1349540a5d6464f0f27488, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 2441c79940171dc43b33badf9fe97828, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0139970435, g: 0.07331283, b: 0.10077344, a: 1}
+  m_IndirectSpecularColor: {r: 0.47382754, g: 0.19744927, b: 0.14083035, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3942,8 +3942,8 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 0.7122642, g: 1, b: 0.93934953, a: 1}
-  m_Intensity: 0.15
+  m_Color: {r: 1, g: 0.60320514, b: 0.1273585, a: 1}
+  m_Intensity: 0.5
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -4000,14 +4000,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1373117200}
-  m_LocalRotation: {x: 0.1238072, y: -0.15434565, z: 0.019498384, w: 0.9800352}
+  m_LocalRotation: {x: 0.1580196, y: -0.15356897, z: 0.024886493, w: 0.9751036}
   m_LocalPosition: {x: 0.35417414, y: 1.6835518, z: -0.68756294}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 954554308}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 14.4, y: -17.9, z: 0}
+  m_LocalEulerAnglesHint: {x: 18.41, y: -17.9, z: 0}
 --- !u!1001 &1381271282
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6005,7 +6005,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4846227374933594, guid: 6ba76c4202b1fd847b2edc6c16958251, type: 3}
       propertyPath: m_RootOrder
-      value: 13
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4846227374933594, guid: 6ba76c4202b1fd847b2edc6c16958251, type: 3}
       propertyPath: m_LocalPosition.x

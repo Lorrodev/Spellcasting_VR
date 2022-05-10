@@ -129,5 +129,5 @@ MonoBehaviour:
   - {x: 0.026924133, y: 0.60920775, z: 0.08095974}
   - {x: 0.026248932, y: 0.60565746, z: 0.08307582}
   - {x: 0.02748251, y: 0.60150886, z: 0.0844602}
-  deltaThreshold: 28
+  deltaThreshold: 45
   useCameraForwardToAlign: 1

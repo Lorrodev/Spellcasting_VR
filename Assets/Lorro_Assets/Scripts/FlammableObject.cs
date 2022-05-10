@@ -9,15 +9,12 @@ public class FlammableObject : MonoBehaviour
     public GameObject fireObj;
 
     private GameObject fire;
-    private Light lt;
 
     // Start is called before the first frame update
     void Start()
     {
         coll = GetComponent<Collider>();
         coll.isTrigger = true;
-
-        lt = GetComponent<Light>();
 
         fire = Instantiate(fireObj, transform);
         fire.SetActive(false);
@@ -26,15 +23,7 @@ public class FlammableObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (false && lt.enabled)
-        {
-            lt.range += Random.Range(-0.1f, 0.1f);
 
-            if (lt.range < 0.3f)
-            {
-                lt.range = 0.3f;
-            }
-        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -43,7 +32,6 @@ public class FlammableObject : MonoBehaviour
         if (other.CompareTag("Fire"))
         {
             fire.SetActive(true);
-            lt.enabled = true;
         }
     }
 }
