@@ -175,8 +175,14 @@ public class SpellManager : MonoBehaviour
         {
             Debug.Log("Executing "+mostLikelyToCastSpell.name);
 
+            GameObject activeSpells = GameObject.Find("ActiveSpells");
+            if (activeSpells == null)
+            {
+                activeSpells = new GameObject("ActiveSpells");
+            }
+
             //Instantiate spell and execute
-            GameObject spellObject = Instantiate(mostLikelyToCastSpell.spellScriptObject, GameObject.Find("ActiveSpells").transform);
+            GameObject spellObject = Instantiate(mostLikelyToCastSpell.spellScriptObject, activeSpells.transform);
             Spell spell = spellObject.GetComponent<Spell>();
 
             spell.Execute();
