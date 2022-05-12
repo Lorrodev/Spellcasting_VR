@@ -4,20 +4,34 @@ using UnityEngine;
 
 public class SpikeSpell : Spell
 {
-    public GameObject visual;
+    public List<AudioClip> impactSounds;
+    public AudioClip rumblingSound;
 
     private float TTL = 7f;
+    private AudioSource ac;
+    private CapsuleCollider cc;
+
+    private bool impactSoundPlayed = false;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        
+        ac = GetComponent<AudioSource>();
+        cc = GetComponent<CapsuleCollider>();
     }
 
     // Update is called once per frame
     void Update()
     {
         TTL -= Time.deltaTime;
+
+        if (7f - TTL >= 0.18f && !impactSoundPlayed)
+        {
+            cc.enabled = false;
+            ac.Stop();
+            ac.PlayOneShot(impactSounds[Random.Range(0, impactSounds.Count)]);
+            impactSoundPlayed = true;
+        }
 
         if (TTL <= 0)
         {
@@ -29,8 +43,8 @@ public class SpikeSpell : Spell
     {
         Camera cam = Camera.main;
         transform.position = new Vector3(cam.transform.position.x, 0, cam.transform.position.z);
+        transform.LookAt(transform.position + new Vector3(cam.transform.forward.x, 0, cam.transform.forward.z), Vector3.up);
 
-        GameObject visualFX = Instantiate(visual, transform);
-        visualFX.transform.LookAt(transform.position + new Vector3(cam.transform.forward.x, 0, cam.transform.forward.z), Vector3.up);
+        ac.PlayOneShot(rumblingSound);
     }
 }

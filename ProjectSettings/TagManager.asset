@@ -9,6 +9,8 @@ TagManager:
   - CastPoint
   - Floor
   - Fire
+  - Earth
+  - Lightning
   layers:
   - Default
   - TransparentFX

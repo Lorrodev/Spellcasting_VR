@@ -10,8 +10,9 @@ public class LightningSpell : Spell
     private AudioSource ac;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
+        ac = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -37,7 +38,6 @@ public class LightningSpell : Spell
             transform.position = hit.point;
             Instantiate(effect, transform);
 
-            ac = GetComponent<AudioSource>();
             ac.PlayOneShot(castSounds[Random.Range(0, castSounds.Count)]);
         }
         else
