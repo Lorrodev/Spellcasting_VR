@@ -35,8 +35,6 @@ public class CastPoint : MonoBehaviour
     {
         timeBetweenSamples = (1f / samplesPerSecond);
         cacheSize = (int)(cacheSeconds * samplesPerSecond);
-
-        Debug.Log("tbs: "+timeBetweenSamples+" / equals to: "+samplesPerSecond+" samples per second / cacheSize: "+cacheSize);
     }
 
     // Update is called once per frame
