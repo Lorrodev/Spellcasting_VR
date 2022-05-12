@@ -5,9 +5,12 @@ using Helpers;
 
 public class Rune : MonoBehaviour
 {
-    public List<Vector3> runePoints = new List<Vector3>();
-    public float deltaThreshold;
-    public bool useCameraForwardToAlign = false;
+    [SerializeField]
+    private List<Vector3> runePoints = new List<Vector3>();
+    [SerializeField]
+    private float deltaThreshold;
+    [SerializeField]
+    private bool useCameraForwardToAlign = false;
 
     private Dictionary<string, Vector3> corners;
 
@@ -111,31 +114,6 @@ public class Rune : MonoBehaviour
         center = corners["center"];*/
     }
 
-    public List<Vector3> GetRunePoints()
-    {
-        return new List<Vector3>(runePoints);
-    }
-
-    /*public float getSize()
-    {
-        return size;
-    }*/
-
-    /*public Vector3 getCenter()
-    {
-        return center;
-    }*/
-
-    /*public Vector3 getForwardVector()
-    {
-        return forward;
-    }
-
-    public Vector3 getUpVector()
-    {
-        return up;
-    }*/
-
     public List<Vector3> getWorldPoints()
     {
         UpdatePoints();
@@ -169,6 +147,26 @@ public class Rune : MonoBehaviour
         worldBoundingBox.Add("forward", transform.rotation * forward);*/
 
         return worldBoundingBox;
+    }
+
+    public List<Vector3> GetRunePoints()
+    {
+        return new List<Vector3>(runePoints);
+    }
+
+    public void SetRunePoints(List<Vector3> points)
+    {
+        runePoints = points;
+    }
+
+    public bool IsUseCameraForwardToAlign()
+    {
+        return useCameraForwardToAlign;
+    }
+
+    public float GetDeltaThreshold()
+    {
+        return deltaThreshold;
     }
 
     private void OnDrawGizmos()

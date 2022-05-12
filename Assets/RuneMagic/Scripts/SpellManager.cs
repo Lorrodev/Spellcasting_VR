@@ -4,20 +4,21 @@ using UnityEngine;
 
 public class SpellManager : MonoBehaviour
 {
-    public GameObject castPointObject;
+    [SerializeField]
+    private GameObject castPointObject;
     private CastPoint castPoint;
 
-    public bool recordRunes = false;
-    public Rune emptyRune;
-    public List<SpellObject> castableSpells;
+    [SerializeField]
+    private bool recordRunes = false;
+    [SerializeField]
+    private Rune emptyRune;
+    [SerializeField]
+    private List<SpellObject> castableSpells;
 
-    public bool debugRunes;
+    [SerializeField]
+    private bool debugRunes;
 
     private Transform cam;
-
-    private bool DEBUG_isInvestigating = false;
-    public List<Vector3> DEBUG_suspectsPoints;
-    private Dictionary<string, Vector3> DEBUG_suspectsBounds;
 
     // Start is called before the first frame update
     void Start()
@@ -32,7 +33,6 @@ public class SpellManager : MonoBehaviour
     {
         if (castPoint.isPossibleRuneDetected() && !castPoint.wasCurrentPossibleRunePickedUp())
         {
-            DEBUG_isInvestigating = true;
             CheckRune();
         }
     }
@@ -57,7 +57,7 @@ public class SpellManager : MonoBehaviour
         {
             Rune recordedRune = Instantiate(emptyRune);
             recordedRune.gameObject.name = "RecordedRune";
-            recordedRune.runePoints = suspectPoints;
+            recordedRune.SetRunePoints(suspectPoints);
         }
 
         Dictionary<string, Vector3> suspectCorners = Helpers.Helpers.GetBoundingBox(suspectPoints);
@@ -72,9 +72,10 @@ public class SpellManager : MonoBehaviour
             SpellObject castableSpell = castableSpells[c];
             Debug.Log("=================== " + castableSpell.name + " ========================");
 
-            for (int r = 0; r < castableSpell.runes.Count; r++)
+            List<GameObject> castableSpellRunes = castableSpell.GetRunes();
+            for (int r = 0; r < castableSpellRunes.Count; r++)
             {
-                GameObject rune = Instantiate(castableSpell.runes[r], runeContainer.transform);
+                GameObject rune = Instantiate(castableSpellRunes[r], runeContainer.transform);
                 Rune castableRune = rune.GetComponent<Rune>();
 
                 Dictionary<string, Vector3> castableRuneWorldBoundingBox = castableRune.getWorldBoundingBox();
@@ -95,7 +96,7 @@ public class SpellManager : MonoBehaviour
                 //Rotate
                 Quaternion rotation;
 
-                if (!castableRune.useCameraForwardToAlign)
+                if (!castableRune.IsUseCameraForwardToAlign())
                 {
                     //Project the up vector of the HMD to the plane defined by right and up of the wand (-> cast point)
                     //Since only the normal of the plane is needed the plane does not need to be built and the castPoint.normal vector is enough
@@ -113,8 +114,6 @@ public class SpellManager : MonoBehaviour
 
                 //Compare Runes
                 List<Vector3> castableRuneWorldPoints = castableRune.getWorldPoints();
-                DEBUG_suspectsPoints = suspectPoints;
-                DEBUG_suspectsBounds = suspectCorners;
 
                 float delta = 0;
 
@@ -146,11 +145,11 @@ public class SpellManager : MonoBehaviour
                 float deltaMultiplier = scaleFactor > 1 ? scaleFactor : 1 / scaleFactor;
                 delta *= 100 * deltaMultiplier;
 
-                Debug.Log("Delta for "+castableRune.gameObject.name+" is " + delta + " / threshold is : "+castableRune.deltaThreshold);
+                Debug.Log("Delta for "+castableRune.gameObject.name+" is " + delta + " / threshold is : "+castableRune.GetDeltaThreshold());
 
-                if (delta < castableRune.deltaThreshold)
+                if (delta < castableRune.GetDeltaThreshold())
                 {
-                    //float gapTopDeltaThreshold = delta - castableRune.deltaThreshold;
+                    //float gapTopDeltaThreshold = delta - castableRune.GetDeltaThreshold();
 
                     if (delta < mostLikelyToCastSpellDelta)
                     {
@@ -159,7 +158,7 @@ public class SpellManager : MonoBehaviour
                         Debug.Log("Might be " + castableSpell.name + " from " + castableRune.gameObject.name + " | Delta: " + mostLikelyToCastSpellDelta);
                     }
 
-                    /*float gapTopDeltaThreshold = delta - castableRune.deltaThreshold;
+                    /*float gapTopDeltaThreshold = delta - castableRune.GetDeltaThreshold();
 
                     if (gapTopDeltaThreshold < mostLikelyToCastSpellGapToDeltaThreshold)
                     {
@@ -182,7 +181,7 @@ public class SpellManager : MonoBehaviour
             }
 
             //Instantiate spell and execute
-            GameObject spellObject = Instantiate(mostLikelyToCastSpell.spellScriptObject, activeSpells.transform);
+            GameObject spellObject = Instantiate(mostLikelyToCastSpell.GetSpellScriptObject(), activeSpells.transform);
             Spell spell = spellObject.GetComponent<Spell>();
 
             spell.Execute();
@@ -201,49 +200,5 @@ public class SpellManager : MonoBehaviour
     public GameObject GetCastPoint()
     {
         return castPoint.gameObject;
-    }
-
-    private void OnDrawGizmos()
-    {
-        /*if (DEBUG_isInvestigating)
-        {
-            Gizmos.color = Color.magenta;
-            Gizmos.DrawLine(DEBUG_suspectsPoints[0], DEBUG_suspectsBounds["center"]);
-            Gizmos.DrawLine(DEBUG_suspectsPoints[0], DEBUG_suspectsPoints[DEBUG_suspectsPoints.Count - 1]);
-        }*/
-        
-        /*if (DEBUG_isInvestigating)
-        {
-            for (int p = 0; p < DEBUG_suspectsPoints.Count - 1; p++)
-            {
-                Gizmos.color = Color.red;
-                Gizmos.DrawLine(transform.position + DEBUG_suspectsPoints[p], transform.position + DEBUG_suspectsPoints[p + 1]);
-
-                Gizmos.color = Color.red;
-                Gizmos.DrawSphere(transform.position + DEBUG_suspectsPoints[p], 0.01f);
-
-                if (p == DEBUG_suspectsPoints.Count - 2)
-                {
-                    Gizmos.DrawSphere(transform.position + DEBUG_suspectsPoints[p + 1], 0.01f);
-
-                }
-            }
-            
-            Gizmos.color = Color.yellow;
-            Gizmos.DrawSphere(DEBUG_suspectCorners["center"], 0.015f);
-
-            Gizmos.color = Color.yellow;
-            Gizmos.DrawLine(DEBUG_suspectCorners["center"], DEBUG_suspectCorners["center"] + cam.forward);
-
-            Gizmos.color = Color.yellow;
-            Gizmos.DrawSphere(DEBUG_suspectCorners["bottomCornerA"], 0.02f);
-            Gizmos.DrawSphere(DEBUG_suspectCorners["bottomCornerB"], 0.02f);
-            Gizmos.DrawSphere(DEBUG_suspectCorners["bottomCornerC"], 0.02f);
-            Gizmos.DrawSphere(DEBUG_suspectCorners["bottomCornerD"], 0.02f);
-            Gizmos.DrawSphere(DEBUG_suspectCorners["topCornerA"], 0.02f);
-            Gizmos.DrawSphere(DEBUG_suspectCorners["topCornerB"], 0.02f);
-            Gizmos.DrawSphere(DEBUG_suspectCorners["topCornerC"], 0.02f);
-            Gizmos.DrawSphere(DEBUG_suspectCorners["topCornerD"], 0.02f);
-        }*/
     }
 }

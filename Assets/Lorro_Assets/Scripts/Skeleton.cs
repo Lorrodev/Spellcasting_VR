@@ -10,7 +10,6 @@ public class Skeleton : MonoBehaviour
     private GameObject skullObj = null;
 
     private bool earthHit = false;
-    private bool lightningHit = false;
 
     // Start is called before the first frame update
     void Start()
@@ -37,8 +36,6 @@ public class Skeleton : MonoBehaviour
         Debug.Log("erathHit: "+earthHit+" / other tag: "+other.tag);
         if (earthHit && other.CompareTag("Lightning") && skullObj == null)
         {
-            lightningHit = true;
-
             Debug.Log("Lightning");
 
             skullObj = Instantiate(skull, GameObject.Find("Rotation").transform);

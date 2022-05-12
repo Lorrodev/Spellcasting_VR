@@ -6,7 +6,8 @@ public class FlammableObject : MonoBehaviour
 {
     Collider coll;
 
-    public GameObject fireObj;
+    [SerializeField]
+    private GameObject fireObj;
 
     private GameObject fire;
 

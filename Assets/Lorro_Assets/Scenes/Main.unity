@@ -4855,7 +4855,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8513aa9996005f549a47c018993d703f, type: 2}
   - {fileID: 11400000, guid: 28dc7284ff6e3df48ab78b52f655fd86, type: 2}
   debugRunes: 0
-  DEBUG_suspectsPoints: []
 --- !u!4 &1978819559
 Transform:
   m_ObjectHideFlags: 0
@@ -5714,6 +5713,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: ff515d2ab5c41d54c8043b1ce937ccd1, type: 2}
+    - target: {fileID: 8025933130574192664, guid: 29af810e3f85cc74882c104e73d6b858,
+        type: 3}
+      propertyPath: index
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 8025933130574192665, guid: 29af810e3f85cc74882c104e73d6b858,
         type: 3}
       propertyPath: m_RootOrder

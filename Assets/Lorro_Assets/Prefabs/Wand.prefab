@@ -295,8 +295,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1adbcf6734770488e5ede5d81be93f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cacheSeconds: 5
-  samplesPerSecond: 20
+  cacheSeconds: 3
+  samplesPerSecond: 60
+  generosity: 1
 --- !u!198 &6635381956373366433
 ParticleSystem:
   m_ObjectHideFlags: 0

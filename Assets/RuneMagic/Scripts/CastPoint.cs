@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class CastPoint : MonoBehaviour
 {
-    public float cacheSeconds = 3f; //chacheSeconds * samplesPerSeconds needs to be an int
-    public int samplesPerSecond = 10;
+    [SerializeField]
+    private float cacheSeconds = 1f; //chacheSeconds * samplesPerSeconds needs to be an int
+    [SerializeField]
+    private int samplesPerSecond = 60;
+
+    [SerializeField]
+    [Range(0, 2f)]
+    private float generosity = 1f;
 
     private int noChangeInPointsOfInterestForNumUpdates = 0;
 
@@ -27,13 +33,17 @@ public class CastPoint : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        timeBetweenSamples = 1 / samplesPerSecond;
+        timeBetweenSamples = (1f / samplesPerSecond);
         cacheSize = (int)(cacheSeconds * samplesPerSecond);
+
+        Debug.Log("tbs: "+timeBetweenSamples+" / equals to: "+samplesPerSecond+" samples per second / cacheSize: "+cacheSize);
     }
 
     // Update is called once per frame
     void Update()
     {
+        timeSinceLastSample += Time.deltaTime;
+
         if (timeSinceLastSample > timeBetweenSamples)
         {
             timeSinceLastSample = 0;
@@ -45,17 +55,14 @@ public class CastPoint : MonoBehaviour
                 pointCache.RemoveAt(0);
             }
         }
-        else
-        {
-            timeSinceLastSample += Time.deltaTime;
-        }
 
         analyzePointCache();
     }
 
     void analyzePointCache()
     {
-        //Get avg. mag between points
+        //Get dynamic avg. mag between points
+        //Currently not used, avgMag is fixed
         /*float totalMag = 0f;
         for (int p = 0; p < pointCache.Count - 1; p++)
         {
@@ -67,8 +74,9 @@ public class CastPoint : MonoBehaviour
         avgMag = avgMag > 0.01 ? avgMag : 0.01f;*/
 
         //Setting fixed avgMag for now
-        //float avgMag = 0.02f;
-        float avgMag = 0.01f;
+        //float avgMag = 0.01f * (1/generosity);
+        float avgMag = timeBetweenSamples * 0.6f;
+        //avgMag = 0.015f;
 
         //Find points with mag above avg (= points of interest)
         //List<Vector3> pointsOfInterest = new List<Vector3>();
@@ -82,7 +90,7 @@ public class CastPoint : MonoBehaviour
 
             if (currentMag > avgMag * 2f)
             {
-                if (pointsSinceLastPOI > 10)
+                if (pointsSinceLastPOI > (samplesPerSecond/6))
                 {
                     pointsOfInterest.Clear();
                 }
@@ -99,7 +107,7 @@ public class CastPoint : MonoBehaviour
                 }
 
                 //If point is not actually interesting but close to POIs
-                if (pointsOfInterest.Count > 5 && pointsSinceLastPOI < 12)
+                if (pointsOfInterest.Count > (samplesPerSecond/12f) && pointsSinceLastPOI < (samplesPerSecond/6f))
                 {
                     pointsOfInterest.Add(pointCache[p]);
                 }
@@ -107,14 +115,14 @@ public class CastPoint : MonoBehaviour
         }
 
         //If there are some spaced out POIs try to identifiy stable points
-        //Stable means POIs that are consistent over multiple updates (for now 8)
-        if (pointsOfInterest.Count > 15 && totalPOIMag > 1f)
+        //Stable means POIs that are consistent over multiple updates
+        if (pointsOfInterest.Count > (samplesPerSecond/6f) * (1f/generosity) && totalPOIMag > 1f * (1f / generosity))
         {
             if (lastPointsOfInterest.Count == pointsOfInterest.Count)
             {
                 noChangeInPointsOfInterestForNumUpdates++;
 
-                if (noChangeInPointsOfInterestForNumUpdates > 8 && possibleRuneDetected == false)
+                if (noChangeInPointsOfInterestForNumUpdates > (timeBetweenSamples * 480f) * (1f / generosity) && possibleRuneDetected == false)
                 {
                     consistentPointsOfInterest = new List<Vector3>(pointsOfInterest);
 
@@ -157,17 +165,17 @@ public class CastPoint : MonoBehaviour
     void OnDrawGizmos()
     {
         //Draw points in cache
-        //Vector3 offsetV1 = new Vector3(0, 0, 1.5f);
+        Vector3 offsetV1 = new Vector3(0, 0, 1.5f);
         for (int p = 0; p < pointCache.Count - 1; p++)
         {
             Gizmos.color = Color.yellow;
-            Gizmos.DrawLine(pointCache[p], pointCache[p + 1]);
+            Gizmos.DrawLine(pointCache[p] + offsetV1, pointCache[p + 1] + offsetV1);
             Gizmos.color = Color.yellow;
-            Gizmos.DrawSphere(pointCache[p], 0.007f);
+            Gizmos.DrawSphere(pointCache[p] + offsetV1, 0.007f);
         }
 
         //Draw points of interest
-        /*Vector3 offsetV2 = new Vector3(0, 0, 1f);
+        Vector3 offsetV2 = new Vector3(0, 0, 1f);
         for (int p = 0; p < pointsOfInterest.Count - 1; p++)
         {
             Gizmos.color = Color.red;
@@ -184,7 +192,7 @@ public class CastPoint : MonoBehaviour
             Gizmos.DrawLine(lastPointsOfInterest[p] + offsetV3, lastPointsOfInterest[p + 1] + offsetV3);
             Gizmos.color = Color.blue;
             Gizmos.DrawSphere(lastPointsOfInterest[p] + offsetV3, 0.007f);
-        }*/
+        }
 
         //Draw consistent points of interest
         for (int p = 0; p < consistentPointsOfInterest.Count - 1; p++)
