@@ -14,18 +14,14 @@ public class Rune : MonoBehaviour
 
     private Dictionary<string, Vector3> corners;
 
-    /*
-    [SerializeField]
-    private Vector3 forward;
-    [SerializeField]
-    private Vector3 up;
-    private float size = 0;
-    private Vector3 center;*/
+    private Transform ps;
 
     // Start is called before the first frame update
     void Start()
     {
         UpdatePoints();
+        ps = transform.Find("ParticleSystem");
+        StartCoroutine(Animate());
     }
 
     // Update is called once per frame
@@ -107,11 +103,45 @@ public class Rune : MonoBehaviour
         UpdatePoints();
     }
 
+    public void FitToRune(Rune other)
+    {
+        float thisSize = GetSize();
+        float otherSize = other.GetSize();
+
+        Vector3 thisCenter = GetCenter();
+        Vector3 otherCenter = other.GetCenter();
+
+        //Scale
+        float scaleFactor = otherSize / thisSize;
+        transform.localScale *= scaleFactor;
+
+        //Translate
+        Vector3 offset = otherCenter - thisCenter;
+        transform.position += offset;
+
+        //Rotate
+        Quaternion rotation;
+
+        GameObject castPoint = GameObject.Find("SpellManager").GetComponent<SpellManager>().GetCastPoint();
+
+        if (!IsUseCameraForwardToAlign())
+        {
+            //Project the up vector of the HMD to the plane defined by right and up of the wand (-> cast point)
+            //Since only the normal of the plane is needed the plane does not need to be built and the castPoint.normal vector is enough
+            Vector3 projectedCamUp = Vector3.ProjectOnPlane(Camera.main.transform.up, castPoint.transform.forward);
+            rotation = Quaternion.LookRotation(castPoint.transform.forward, projectedCamUp);
+        }
+        else
+        {
+            rotation = Quaternion.LookRotation(Camera.main.transform.forward, Camera.main.transform.up);
+        }
+
+        transform.rotation = rotation;
+    }
+
     public void UpdatePoints()
     {
         corners = Helpers.Helpers.GetBoundingBox(runePoints);
-        /*size = (corners["bottomCornerA"] - corners["topCornerC"]).magnitude;
-        center = corners["center"];*/
     }
 
     public List<Vector3> getWorldPoints()
@@ -154,6 +184,18 @@ public class Rune : MonoBehaviour
         return new List<Vector3>(runePoints);
     }
 
+    public float GetSize()
+    {
+        Dictionary<string, Vector3> thisWorldBoundingBox = getWorldBoundingBox();
+        return (thisWorldBoundingBox["bottomCornerA"] - thisWorldBoundingBox["topCornerC"]).magnitude;
+    }
+
+    public Vector3 GetCenter()
+    {
+        Dictionary<string, Vector3> thisWorldBoundingBox = getWorldBoundingBox();
+        return thisWorldBoundingBox["center"];
+    }
+
     public void SetRunePoints(List<Vector3> points)
     {
         runePoints = points;
@@ -167,6 +209,64 @@ public class Rune : MonoBehaviour
     public float GetDeltaThreshold()
     {
         return deltaThreshold;
+    }
+
+    public float GetDeltaToRune(Rune other)
+    {
+        float delta = 0f;
+
+        List<Vector3> thisWorldPoints = getWorldPoints();
+        List<Vector3> otherWorldPoints = other.getWorldPoints();
+
+        float pointCountFactor;
+
+        List<Vector3> biggerList;
+        List<Vector3> smallerList;
+
+        if (thisWorldPoints.Count > otherWorldPoints.Count)
+        {
+            biggerList = new List<Vector3>(thisWorldPoints);
+            smallerList = new List<Vector3>(otherWorldPoints);
+        }
+        else
+        {
+            biggerList = new List<Vector3>(otherWorldPoints);
+            smallerList = new List<Vector3>(thisWorldPoints);
+        }
+
+        pointCountFactor = (float)biggerList.Count / (float)smallerList.Count;
+
+        for (int p = 0; p < biggerList.Count; p++)
+        {
+            delta += (biggerList[p] - smallerList[Mathf.FloorToInt(p / pointCountFactor)]).magnitude;
+        }
+
+        delta /= biggerList.Count;
+
+        //Debug.Log("Delta for " + gameObject.name + " is " + delta + " / threshold is : " + GetDeltaThreshold());
+
+        return delta;
+    }
+
+    IEnumerator Animate()
+    {
+        UpdatePoints();
+
+        List<Vector3> worldPoints = getWorldPoints();
+        ps.position = worldPoints[0];
+        ps.GetComponent<ParticleSystem>().Play();
+        for (int i = 1; i < worldPoints.Count; i++)
+        {
+            Vector3 vect = worldPoints[i] - ps.position;
+            while (vect.magnitude > 0.01f)
+            {
+                ps.position += vect * Time.deltaTime * 30f;
+                vect = worldPoints[i] - ps.position;
+                yield return null;
+            }
+        }
+
+        ps.GetComponent<ParticleSystem>().Stop();
     }
 
     private void OnDrawGizmos()

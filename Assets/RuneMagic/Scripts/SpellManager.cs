@@ -15,6 +15,8 @@ public class SpellManager : MonoBehaviour
     [SerializeField]
     private List<SpellObject> castableSpells;
 
+    private Trainer trainer;
+
     [SerializeField]
     private bool debugRunes;
 
@@ -26,6 +28,8 @@ public class SpellManager : MonoBehaviour
         castPoint = castPointObject.GetComponent<CastPoint>();
 
         cam = Camera.main.transform;
+
+        trainer = GetComponent<Trainer>();
     }
 
     // Update is called once per frame
@@ -33,13 +37,11 @@ public class SpellManager : MonoBehaviour
     {
         if (castPoint.isPossibleRuneDetected() && !castPoint.wasCurrentPossibleRunePickedUp())
         {
-            CheckRune();
+            if (trainer.IsTrainingComplete())
+            {
+                CheckRune();
+            }
         }
-    }
-
-    public void SetCastPoint()
-    {
-
     }
 
     private void CheckRune()
@@ -53,16 +55,9 @@ public class SpellManager : MonoBehaviour
         //float mostLikelyToCastSpellGapToDeltaThreshold = 0f;
         float mostLikelyToCastSpellDelta = Mathf.Infinity;
 
-        if (recordRunes)
-        {
-            Rune recordedRune = Instantiate(emptyRune);
-            recordedRune.gameObject.name = "RecordedRune";
-            recordedRune.SetRunePoints(suspectPoints);
-        }
-
-        Dictionary<string, Vector3> suspectCorners = Helpers.Helpers.GetBoundingBox(suspectPoints);
-        float suspectSize = (suspectCorners["bottomCornerA"] - suspectCorners["topCornerC"]).magnitude;
-        Vector3 suspectCenter = suspectCorners["center"];
+        Rune suspectRune = Instantiate(emptyRune);
+        suspectRune.gameObject.name = "RecordedRune";
+        suspectRune.SetRunePoints(suspectPoints);
 
         //Possible to link runes with spell object without deleting them every time?
         GameObject runeContainer = new GameObject("RuneContainer");
@@ -78,94 +73,22 @@ public class SpellManager : MonoBehaviour
                 GameObject rune = Instantiate(castableSpellRunes[r], runeContainer.transform);
                 Rune castableRune = rune.GetComponent<Rune>();
 
-                Dictionary<string, Vector3> castableRuneWorldBoundingBox = castableRune.getWorldBoundingBox();
+                float scaleFactor = suspectRune.GetSize() / castableRune.GetSize();
 
-                float castableRuneSize = (castableRuneWorldBoundingBox["bottomCornerA"] - castableRuneWorldBoundingBox["topCornerC"]).magnitude;
-
-                //Start of Dynamic Rune Adjustment
-
-                //Scale
-                //For now all axis are scaled the same
-                float scaleFactor = suspectSize / castableRuneSize;
-                castableRune.transform.localScale *= scaleFactor;
-
-                //Translate
-                Vector3 offset = suspectCenter - castableRuneWorldBoundingBox["center"];
-                castableRune.transform.position += offset;
-
-                //Rotate
-                Quaternion rotation;
-
-                if (!castableRune.IsUseCameraForwardToAlign())
-                {
-                    //Project the up vector of the HMD to the plane defined by right and up of the wand (-> cast point)
-                    //Since only the normal of the plane is needed the plane does not need to be built and the castPoint.normal vector is enough
-                    Vector3 projectedCamUp = Vector3.ProjectOnPlane(cam.up, castPoint.transform.forward);
-                    rotation = Quaternion.LookRotation(castPoint.transform.forward, projectedCamUp);
-                }
-                else
-                {
-                    rotation = Quaternion.LookRotation(cam.forward, cam.up);
-                }
-
-                castableRune.transform.rotation = rotation;
-
-                //End of Dynamic Rune Adjustment
-
-                //Compare Runes
-                List<Vector3> castableRuneWorldPoints = castableRune.getWorldPoints();
-
-                float delta = 0;
-
-                float pointCountFactor;
-
-                List<Vector3> biggerList;
-                List<Vector3> smallerList;
-
-                if (castableRuneWorldPoints.Count > suspectPoints.Count)
-                {
-                    biggerList = new List<Vector3>(castableRuneWorldPoints);
-                    smallerList = new List<Vector3>(suspectPoints);
-                }
-                else
-                {
-                    biggerList = new List<Vector3>(suspectPoints);
-                    smallerList = new List<Vector3>(castableRuneWorldPoints);
-                }
-
-                pointCountFactor = (float)biggerList.Count / (float)smallerList.Count;
-
-                for (int p = 0; p < biggerList.Count; p++)
-                {
-                    delta += (biggerList[p] - smallerList[Mathf.FloorToInt(p / pointCountFactor)]).magnitude;
-                }
-
-                delta /= biggerList.Count;
+                castableRune.FitToRune(suspectRune);
+                float delta = castableRune.GetDeltaToRune(suspectRune);
 
                 float deltaMultiplier = scaleFactor > 1 ? scaleFactor : 1 / scaleFactor;
                 delta *= 100 * deltaMultiplier;
 
-                Debug.Log("Delta for "+castableRune.gameObject.name+" is " + delta + " / threshold is : "+castableRune.GetDeltaThreshold());
-
                 if (delta < castableRune.GetDeltaThreshold())
                 {
-                    //float gapTopDeltaThreshold = delta - castableRune.GetDeltaThreshold();
-
                     if (delta < mostLikelyToCastSpellDelta)
                     {
                         mostLikelyToCastSpellDelta = delta;
                         mostLikelyToCastSpell = castableSpell;
                         Debug.Log("Might be " + castableSpell.name + " from " + castableRune.gameObject.name + " | Delta: " + mostLikelyToCastSpellDelta);
                     }
-
-                    /*float gapTopDeltaThreshold = delta - castableRune.GetDeltaThreshold();
-
-                    if (gapTopDeltaThreshold < mostLikelyToCastSpellGapToDeltaThreshold)
-                    {
-                        mostLikelyToCastSpellGapToDeltaThreshold = gapTopDeltaThreshold;
-                        mostLikelyToCastSpell = castableSpell;
-                        Debug.Log("Might be " + castableSpell.name + " from " + castableRune.gameObject.name + " | Gap to delta: " + mostLikelyToCastSpellGapToDeltaThreshold);
-                    }*/
                 }
             }
         }
@@ -189,6 +112,11 @@ public class SpellManager : MonoBehaviour
         else
         {
             Debug.Log("Not likely a spell");
+        }
+
+        if (!recordRunes)
+        {
+            Destroy(suspectRune.gameObject);
         }
 
         if (!debugRunes)
