@@ -21,7 +21,7 @@ public class Rune : MonoBehaviour
     {
         UpdatePoints();
         ps = transform.Find("ParticleSystem");
-        StartCoroutine(Animate());
+        ps.GetComponent<ParticleSystem>().Stop();
     }
 
     // Update is called once per frame
@@ -248,21 +248,23 @@ public class Rune : MonoBehaviour
         return delta;
     }
 
-    IEnumerator Animate()
+    public IEnumerator Animate()
     {
-        UpdatePoints();
-
         List<Vector3> worldPoints = getWorldPoints();
-        ps.position = worldPoints[0];
-        ps.GetComponent<ParticleSystem>().Play();
-        for (int i = 1; i < worldPoints.Count; i++)
+
+        if (worldPoints.Count > 0)
         {
-            Vector3 vect = worldPoints[i] - ps.position;
-            while (vect.magnitude > 0.01f)
+            ps.position = worldPoints[0];
+            ps.GetComponent<ParticleSystem>().Play();
+            for (int i = 1; i < worldPoints.Count; i++)
             {
-                ps.position += vect * Time.deltaTime * 30f;
-                vect = worldPoints[i] - ps.position;
-                yield return null;
+                Vector3 vect = worldPoints[i] - ps.position;
+                while (vect.magnitude > 0.01f)
+                {
+                    ps.position += vect * Time.deltaTime * 30f;
+                    vect = worldPoints[i] - ps.position;
+                    yield return null;
+                }
             }
         }
 

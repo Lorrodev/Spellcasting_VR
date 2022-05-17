@@ -15,6 +15,8 @@ public class SpellManager : MonoBehaviour
     [SerializeField]
     private List<SpellObject> castableSpells;
 
+    [SerializeField]
+    private bool trainingMode = false;
     private Trainer trainer;
 
     [SerializeField]
@@ -35,12 +37,18 @@ public class SpellManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (castPoint.isPossibleRuneDetected() && !castPoint.wasCurrentPossibleRunePickedUp())
+        if (!trainingMode)
         {
-            if (trainer.IsTrainingComplete())
+
+            if (castPoint.isPossibleRuneDetected() && !castPoint.wasCurrentPossibleRunePickedUp())
             {
                 CheckRune();
             }
+        }
+
+        if (trainer.IsTrainingComplete())
+        {
+            trainingMode = false;
         }
     }
 
@@ -106,7 +114,6 @@ public class SpellManager : MonoBehaviour
             //Instantiate spell and execute
             GameObject spellObject = Instantiate(mostLikelyToCastSpell.GetSpellScriptObject(), activeSpells.transform);
             Spell spell = spellObject.GetComponent<Spell>();
-
             spell.Execute();
         }
         else
@@ -125,8 +132,24 @@ public class SpellManager : MonoBehaviour
         }
     }
 
+    public bool IsTrainingMode()
+    {
+        return trainingMode;
+    }
+
     public GameObject GetCastPoint()
     {
         return castPoint.gameObject;
+    }
+
+    public Rune GetEmptyRune()
+    {
+        return emptyRune;
+    }
+
+    public List<SpellObject> GetCastableSpells()
+    {
+        //By Referrence!
+        return castableSpells;
     }
 }

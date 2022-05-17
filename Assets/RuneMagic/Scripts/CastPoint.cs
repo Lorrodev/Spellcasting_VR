@@ -30,11 +30,15 @@ public class CastPoint : MonoBehaviour
 
     private bool currentPossibleRunePickedUp = false;
 
+    private ParticleSystem ps;
+
     // Start is called before the first frame update
     void Start()
     {
         timeBetweenSamples = (1f / samplesPerSecond);
         cacheSize = (int)(cacheSeconds * samplesPerSecond);
+
+        ps = GetComponent<ParticleSystem>();
     }
 
     // Update is called once per frame
@@ -96,6 +100,9 @@ public class CastPoint : MonoBehaviour
                 pointsSinceLastPOI = 0;
                 totalPOIMag += currentMag;
                 pointsOfInterest.Add(pointCache[p]);
+
+                var emission = ps.emission;
+                emission.rateOverTime = 300f;
             }
             else
             {
@@ -108,6 +115,11 @@ public class CastPoint : MonoBehaviour
                 if (pointsOfInterest.Count > (samplesPerSecond/12f) && pointsSinceLastPOI < (samplesPerSecond/6f))
                 {
                     pointsOfInterest.Add(pointCache[p]);
+                }
+                else
+                {
+                    var emission = ps.emission;
+                    emission.rateOverTime = 5f;
                 }
             }
         }

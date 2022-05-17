@@ -45,12 +45,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0672984a1603e3349b8d76a1b9cc01b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  castPointObject: {fileID: 7621203310482596989, guid: 945cf6b47e11c104aad12af0c5f6f778,
+  castPointObject: {fileID: 525454955082332301, guid: f668093fe0bfa6046ad1b837f1f7eada,
     type: 3}
   recordRunes: 0
   emptyRune: {fileID: 6261320631332944931, guid: 76406fa88ca15384baf06ced1a944f27,
     type: 3}
   castableSpells: []
+  trainingMode: 0
   debugRunes: 0
 --- !u!114 &-1848151180235601744
 MonoBehaviour:
@@ -64,3 +65,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bb182891f88cb94bbdb4ccdb2bf03c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ghostSphere: {fileID: 1147379969648097800, guid: 2a86fff7434a6404ca459c7091335944,
+    type: 3}
