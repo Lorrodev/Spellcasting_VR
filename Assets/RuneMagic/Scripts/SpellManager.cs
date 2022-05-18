@@ -16,10 +16,6 @@ public class SpellManager : MonoBehaviour
     private List<SpellObject> castableSpells;
 
     [SerializeField]
-    private bool trainingMode = false;
-    private Trainer trainer;
-
-    [SerializeField]
     private bool debugRunes;
 
     private Transform cam;
@@ -30,25 +26,14 @@ public class SpellManager : MonoBehaviour
         castPoint = castPointObject.GetComponent<CastPoint>();
 
         cam = Camera.main.transform;
-
-        trainer = GetComponent<Trainer>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!trainingMode)
+        if (castPoint.isPossibleRuneDetected() && !castPoint.wasCurrentPossibleRunePickedUp())
         {
-
-            if (castPoint.isPossibleRuneDetected() && !castPoint.wasCurrentPossibleRunePickedUp())
-            {
-                CheckRune();
-            }
-        }
-
-        if (trainer.IsTrainingComplete())
-        {
-            trainingMode = false;
+            CheckRune();
         }
     }
 
@@ -130,11 +115,6 @@ public class SpellManager : MonoBehaviour
         {
             Destroy(runeContainer);
         }
-    }
-
-    public bool IsTrainingMode()
-    {
-        return trainingMode;
     }
 
     public GameObject GetCastPoint()

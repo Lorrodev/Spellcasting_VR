@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Trainer : MonoBehaviour
 {
-    [SerializeField]
+    /*[SerializeField]
     private GameObject ghostSphere;
 
     private bool trainingComplete = false;
@@ -125,5 +125,5 @@ public class Trainer : MonoBehaviour
     public bool IsTrainingComplete()
     {
         return trainingComplete;
-    }
+    }*/
 }

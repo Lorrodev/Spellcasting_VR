@@ -47,10 +47,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   effect: {fileID: 1454807473737458, guid: 6108438f5e38d0b4b8fed06af6b74254, type: 3}
+  aimEffectWand: {fileID: 1747586400421602, guid: 27a7f93524a582440b2e162bf001be78,
+    type: 3}
+  aimEffectTarget: {fileID: 1747586400421602, guid: 27a7f93524a582440b2e162bf001be78,
+    type: 3}
   castSounds:
   - {fileID: 8300000, guid: 0df2e65c0da0d447fbba8faf17143eb7, type: 3}
   - {fileID: 8300000, guid: 2731bef1c93f54e03ae6fe3b61e7054f, type: 3}
   - {fileID: 8300000, guid: edd52c5ebe0244c788893d7cc84c6e6d, type: 3}
+  aimSounds:
+  - {fileID: 8300000, guid: 0facb57adc8a24c789e41c5ab82456be, type: 3}
+  - {fileID: 8300000, guid: 3b54f4df437e641b4b94d79def0e8b16, type: 3}
+  - {fileID: 8300000, guid: dc1cec14099de46f4bf9d02f65a84250, type: 3}
+  - {fileID: 8300000, guid: 12e3358728b0247e79d293ff4789e700, type: 3}
 --- !u!82 &-8006605269801860303
 AudioSource:
   m_ObjectHideFlags: 0
@@ -107,7 +116,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0.5
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -158,5 +167,5 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.02
-  m_Center: {x: 0, y: -0.05, z: 0}
+  m_Radius: 0.2
+  m_Center: {x: 0, y: 0, z: 0}

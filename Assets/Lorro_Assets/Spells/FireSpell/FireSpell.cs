@@ -19,7 +19,11 @@ public class FireSpell : Spell
     private ParticleSystem ps;
     private Light lt;
 
+    private bool isFlying = false;
     private bool collided = false;
+
+    private SpellManager sm;
+    private GameObject cp;
 
     void Awake()
     {
@@ -29,56 +33,74 @@ public class FireSpell : Spell
         lt = GetComponent<Light>();
 
         sc.isTrigger = true;
+
+        sm = GameObject.Find("SpellManager").GetComponent<SpellManager>();
+        cp = sm.GetCastPoint();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!collided)
+        if (isFlying)
         {
-            transform.position += direction * Time.deltaTime * speed;
+            if (!collided)
+            {
+                transform.position += direction * Time.deltaTime * speed;
+            }
+            else
+            {
+                lt.intensity -= Time.deltaTime;
+            }
+
+            TTL -= Time.deltaTime;
+
+            if (TTL <= 0)
+            {
+                Destroy(gameObject);
+            }
         }
         else
         {
-            lt.intensity -= Time.deltaTime;
-        }
-
-        TTL -= Time.deltaTime;
-
-        if (TTL <= 0)
-        {
-            Destroy(gameObject);
+            transform.position = cp.transform.position;
         }
     }
 
     public override void Execute()
     {
-        SpellManager spellManager = GameObject.Find("SpellManager").GetComponent<SpellManager>();
+        transform.position = cp.transform.position;
 
-        GameObject castPoint = spellManager.GetCastPoint();
+        ac.PlayOneShot(flightSound);
+        ac.PlayOneShot(castSounds[Random.Range(0, castSounds.Count)]);
+        Invoke("Fire", 0.8f);
+    }
 
-        //Init
-        transform.position = castPoint.transform.position;
-        direction = castPoint.transform.forward;
+    private void Fire()
+    {
+        direction = cp.transform.forward;
 
         ac.PlayOneShot(castSounds[Random.Range(0, castSounds.Count)]);
-        ac.PlayOneShot(flightSound);
+        ps.Play();
+
+        isFlying = true;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        ps.Stop();
-        Instantiate(explosionEffect, transform);
+        if (isFlying)
+        {
+            ps.Stop();
+            Instantiate(explosionEffect, transform);
 
-        AudioClip sound = impactSounds[Random.Range(0, castSounds.Count)];
+            AudioClip sound = impactSounds[Random.Range(0, castSounds.Count)];
 
-        ac.Stop();
+            ac.Stop();
 
-        ac.spatialBlend = 0.5f;
-        ac.PlayOneShot(sound);
+            ac.spatialBlend = 0.5f;
+            ac.PlayOneShot(sound);
 
-        TTL = sound.length;
+            TTL = sound.length;
 
-        collided = true;
+            collided = true;
+        }
     }
 }
