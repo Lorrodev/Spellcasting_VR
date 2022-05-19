@@ -101,6 +101,11 @@ public class FireSpell : Spell
             TTL = sound.length;
 
             collided = true;
+
+            if (other.CompareTag("Player"))
+            {
+                GameObject.Find("DemoManager").GetComponent<DemoManager>().onResetDemo?.Invoke();
+            }
         }
     }
 }

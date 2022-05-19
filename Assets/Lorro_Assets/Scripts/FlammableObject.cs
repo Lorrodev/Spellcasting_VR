@@ -21,6 +21,15 @@ public class FlammableObject : MonoBehaviour
         fire.SetActive(false);
     }
 
+    private void OnEnable()
+    {
+        FindObjectOfType<DemoManager>().onResetDemo += ResetObj;
+    }
+    private void OnDisable()
+    {
+        FindObjectOfType<DemoManager>().onResetDemo -= ResetObj;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -34,5 +43,10 @@ public class FlammableObject : MonoBehaviour
         {
             fire.SetActive(true);
         }
+    }
+
+    public void ResetObj()
+    {
+        fire.SetActive(false);
     }
 }

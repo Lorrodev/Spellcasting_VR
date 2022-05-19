@@ -16,6 +16,14 @@ public class Skeleton : MonoBehaviour
     {
         transform.position = transform.position - new Vector3(0, 1, 0);
     }
+    private void OnEnable()
+    {
+        FindObjectOfType<DemoManager>().onResetDemo += ResetObj;
+    }
+    private void OnDisable()
+    {
+        FindObjectOfType<DemoManager>().onResetDemo -= ResetObj;
+    }
 
     // Update is called once per frame
     void Update()
@@ -36,10 +44,14 @@ public class Skeleton : MonoBehaviour
         Debug.Log("erathHit: "+earthHit+" / other tag: "+other.tag);
         if (earthHit && other.CompareTag("Lightning") && skullObj == null)
         {
-            Debug.Log("Lightning");
-
             skullObj = Instantiate(skull, GameObject.Find("Rotation").transform);
             skullObj.transform.position = transform.position;
         }
+    }
+
+    public void ResetObj()
+    {
+        earthHit = false;
+        transform.position = new Vector3(transform.position.x, -1, transform.position.z);
     }
 }

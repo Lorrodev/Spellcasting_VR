@@ -4,13 +4,25 @@ using UnityEngine;
 
 public class SkullEnemy : MonoBehaviour
 {
-    void Awake()
+    private float iFrameSecs = 0.3f;
+
+    private void OnEnable()
     {
+        FindObjectOfType<DemoManager>().onResetDemo += ResetObj;
+    }
+    private void OnDisable()
+    {
+        FindObjectOfType<DemoManager>().onResetDemo -= ResetObj;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (iFrameSecs > 0)
+        {
+            iFrameSecs -= Time.deltaTime;
+        }
+
         transform.LookAt(Camera.main.transform.position);
 
         if (transform.position.y < 2f)
@@ -21,9 +33,14 @@ public class SkullEnemy : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Fire") || other.CompareTag("Lightning"))
+        if (iFrameSecs <= 0 && (other.CompareTag("Fire") || other.CompareTag("Lightning")))
         {
             Destroy(gameObject);
         }
+    }
+
+    public void ResetObj()
+    {
+        Destroy(gameObject);
     }
 }
