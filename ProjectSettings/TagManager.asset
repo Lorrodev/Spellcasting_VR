@@ -11,6 +11,8 @@ TagManager:
   - Fire
   - Earth
   - Lightning
+  - Destructable
+  - NoFire
   layers:
   - Default
   - TransparentFX

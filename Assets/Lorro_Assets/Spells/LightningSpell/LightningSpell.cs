@@ -10,6 +10,7 @@ public class LightningSpell : Spell
 
     public List<AudioClip> castSounds;
     public List<AudioClip> aimSounds;
+    public List<AudioClip> failSounds;
 
     private AudioSource ac;
 
@@ -27,6 +28,15 @@ public class LightningSpell : Spell
         ac = GetComponent<AudioSource>();
         sm = GameObject.Find("SpellManager").GetComponent<SpellManager>();
         cp = sm.GetCastPoint();
+    }
+
+    private void OnEnable()
+    {
+        FindObjectOfType<DemoManager>().onResetDemo += ResetObj;
+    }
+    private void OnDisable()
+    {
+        FindObjectOfType<DemoManager>().onResetDemo -= ResetObj;
     }
 
     // Update is called once per frame
@@ -47,7 +57,12 @@ public class LightningSpell : Spell
             RaycastHit hit;
             if (Physics.Raycast(cp.transform.position, cp.transform.forward, out hit))
             {
-                aET.transform.position += (hit.point + Vector3.up * 0.2f - aET.transform.position) * Time.deltaTime * 25f;
+                //aET.transform.position += (hit.point + Vector3.up * 0.2f - aET.transform.position) * Time.deltaTime * 25f;
+                aET.transform.position += (hit.point - aET.transform.position) * Time.deltaTime * 25f;
+            }
+            else
+            {
+                aET.transform.position += (cp.transform.position + cp.transform.forward * 25f - aET.transform.position) * Time.deltaTime * 25f;
             }
         }
     }
@@ -66,10 +81,16 @@ public class LightningSpell : Spell
         }
         else
         {
-            Destroy(gameObject);
+            ac.PlayOneShot(failSounds[Random.Range(0, castSounds.Count)]);
+            Invoke("Kill", 1.2f);
         }
 
         wasFired = true;
+    }
+
+    private void Kill()
+    {
+        Destroy(gameObject);
     }
 
     public override void Execute()
@@ -80,10 +101,14 @@ public class LightningSpell : Spell
 
         aET = Instantiate(aimEffectTarget, transform);
         aET.transform.position = Vector3.down * 100;
-        aEW.transform.localScale = new Vector3(1.8f, 1.8f, 1.8f);
+        aEW.transform.localScale = new Vector3(3f, 3f, 3f);
 
         ac.PlayOneShot(aimSounds[Random.Range(0, castSounds.Count)]);
 
         Invoke("Fire", 1.8f);
+    }
+    public void ResetObj()
+    {
+        Destroy(gameObject);
     }
 }

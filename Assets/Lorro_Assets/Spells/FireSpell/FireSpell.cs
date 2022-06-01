@@ -8,10 +8,12 @@ public class FireSpell : Spell
     public float TTL = 10;
 
     public GameObject explosionEffect;
+    public GameObject fireEffect;
 
     public List<AudioClip> castSounds;
     public AudioClip flightSound;
     public List<AudioClip> impactSounds;
+
 
     private Vector3 direction;
     private SphereCollider sc;
@@ -36,6 +38,15 @@ public class FireSpell : Spell
 
         sm = GameObject.Find("SpellManager").GetComponent<SpellManager>();
         cp = sm.GetCastPoint();
+    }
+
+    private void OnEnable()
+    {
+        FindObjectOfType<DemoManager>().onResetDemo += ResetObj;
+    }
+    private void OnDisable()
+    {
+        FindObjectOfType<DemoManager>().onResetDemo -= ResetObj;
     }
 
     // Update is called once per frame
@@ -86,7 +97,7 @@ public class FireSpell : Spell
 
     private void OnTriggerEnter(Collider other)
     {
-        if (isFlying)
+        if (isFlying && !collided)
         {
             ps.Stop();
             Instantiate(explosionEffect, transform);
@@ -105,7 +116,15 @@ public class FireSpell : Spell
             if (other.CompareTag("Player"))
             {
                 GameObject.Find("DemoManager").GetComponent<DemoManager>().onResetDemo?.Invoke();
+            }else if (!other.CompareTag("NoFire"))
+            {
+                GameObject obj = Instantiate(fireEffect, GameObject.Find("ActiveEffects").transform);
+                obj.transform.position = transform.position;
             }
         }
+    }
+    public void ResetObj()
+    {
+        Destroy(gameObject);
     }
 }

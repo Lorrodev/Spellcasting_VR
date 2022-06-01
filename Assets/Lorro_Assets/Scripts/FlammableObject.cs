@@ -11,6 +11,8 @@ public class FlammableObject : MonoBehaviour
 
     private GameObject fire;
 
+    private AudioSource ac;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +21,8 @@ public class FlammableObject : MonoBehaviour
 
         fire = Instantiate(fireObj, transform);
         fire.SetActive(false);
+
+        ac = GetComponent<AudioSource>();
     }
 
     private void OnEnable()
@@ -30,23 +34,19 @@ public class FlammableObject : MonoBehaviour
         FindObjectOfType<DemoManager>().onResetDemo -= ResetObj;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log(other.tag);
         if (other.CompareTag("Fire") || other.CompareTag("Lightning"))
         {
             fire.SetActive(true);
+            ac.Play();
         }
     }
 
     public void ResetObj()
     {
         fire.SetActive(false);
+        ac.Stop();
     }
 }

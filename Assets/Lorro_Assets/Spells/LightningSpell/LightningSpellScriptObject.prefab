@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3209001532087820316}
   - component: {fileID: -8006605269801860303}
   - component: {fileID: 472975823342915572}
+  - component: {fileID: 2263800782454551271}
   m_Layer: 0
   m_Name: LightningSpellScriptObject
   m_TagString: Lightning
@@ -49,7 +50,7 @@ MonoBehaviour:
   effect: {fileID: 1454807473737458, guid: 6108438f5e38d0b4b8fed06af6b74254, type: 3}
   aimEffectWand: {fileID: 1747586400421602, guid: 27a7f93524a582440b2e162bf001be78,
     type: 3}
-  aimEffectTarget: {fileID: 1747586400421602, guid: 27a7f93524a582440b2e162bf001be78,
+  aimEffectTarget: {fileID: 6351805677957872288, guid: f33eb4acf0018524f98cc3411e23c9bd,
     type: 3}
   castSounds:
   - {fileID: 8300000, guid: 0df2e65c0da0d447fbba8faf17143eb7, type: 3}
@@ -60,6 +61,10 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 3b54f4df437e641b4b94d79def0e8b16, type: 3}
   - {fileID: 8300000, guid: dc1cec14099de46f4bf9d02f65a84250, type: 3}
   - {fileID: 8300000, guid: 12e3358728b0247e79d293ff4789e700, type: 3}
+  failSounds:
+  - {fileID: 8300000, guid: 6e44cbaaa180e42439333a5f47277505, type: 3}
+  - {fileID: 8300000, guid: bfc60bca3a9bd47078ca2ffc2bb25774, type: 3}
+  - {fileID: 8300000, guid: 24bb44af5561744a0b17d7dd10ef6750, type: 3}
 --- !u!82 &-8006605269801860303
 AudioSource:
   m_ObjectHideFlags: 0
@@ -169,3 +174,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.2
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &2263800782454551271
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1197939578098623589}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
