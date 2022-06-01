@@ -5,8 +5,29 @@ using Valve.VR;
 
 public class SteamVRInit : MonoBehaviour
 {
+    [SerializeField]
+    private float refreshInterval = 2f;
+
+    private float lastRefresh = 0f;
+
     //Modified version of file: https://gist.github.com/hon454/83b54708ee066e44af4d0b68a6862f02
     private void Start()
+    {
+        GetController();
+    }
+
+    private void Update()
+    {
+        lastRefresh += Time.deltaTime;
+
+        if (lastRefresh >= refreshInterval)
+        {
+            lastRefresh = 0f;
+            GetController();
+        }
+    }
+
+    private void GetController()
     {
         SteamVR_TrackedObject.EIndex trackerIndex = 0;
         SteamVR_TrackedObject.EIndex fallbackControllerIndex = 0;
@@ -20,16 +41,14 @@ public class SteamVRInit : MonoBehaviour
 
             EDeviceActivityLevel active = OpenVR.System.GetTrackedDeviceActivityLevel(i);
 
-            Debug.Log("Found " + type.ToString() + " in state " + active.ToString());
             if (type.ToString().Contains("tracker") && active.ToString().Contains("UserInteraction"))
             {
                 trackerIndex = (SteamVR_TrackedObject.EIndex)i;
-                Debug.Log("Found " + type.ToString() + " in state " + active.ToString() + " on index: " + i);
                 trackerFound = true;
-            }else if (type.ToString().Contains("controller"))
+            }
+            else if (type.ToString().Contains("controller"))
             {
                 fallbackControllerIndex = (SteamVR_TrackedObject.EIndex)i;
-                Debug.Log("Set controller fallback to " + type.ToString() + " on index: " + i);
             }
         }
 

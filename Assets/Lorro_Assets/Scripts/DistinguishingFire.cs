@@ -50,7 +50,8 @@ public class DistinguishingFire : MonoBehaviour
 
             ac.volume -= Time.deltaTime;
         }
-        else if(TTL <= -5f)
+        
+        if(TTL <= -5f)
         {
             Destroy(gameObject);
         }
