@@ -18,14 +18,10 @@ public class SpellManager : MonoBehaviour
     [SerializeField]
     private bool debugRunes;
 
-    private Transform cam;
-
     // Start is called before the first frame update
     void Start()
     {
         castPoint = castPointObject.GetComponent<CastPoint>();
-
-        cam = Camera.main.transform;
     }
 
     // Update is called once per frame
@@ -58,7 +54,7 @@ public class SpellManager : MonoBehaviour
         for (int c = 0; c < castableSpells.Count; c++)
         {
             SpellObject castableSpell = castableSpells[c];
-            Debug.Log("=================== " + castableSpell.name + " ========================");
+            //Debug.Log("=================== " + castableSpell.name + " ========================");
 
             List<GameObject> castableSpellRunes = castableSpell.GetRunes();
             for (int r = 0; r < castableSpellRunes.Count; r++)
@@ -125,11 +121,5 @@ public class SpellManager : MonoBehaviour
     public Rune GetEmptyRune()
     {
         return emptyRune;
-    }
-
-    public List<SpellObject> GetCastableSpells()
-    {
-        //By Referrence!
-        return castableSpells;
     }
 }

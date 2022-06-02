@@ -103,6 +103,9 @@ public class CastPoint : MonoBehaviour
 
                 var emission = ps.emission;
                 emission.rateOverTime = 300f;
+
+                var main = ps.main;
+                main.startLifetime = 3f;
             }
             else
             {
@@ -120,6 +123,10 @@ public class CastPoint : MonoBehaviour
                 {
                     var emission = ps.emission;
                     emission.rateOverTime = 5f;
+
+                    var main = ps.main;
+                    main.startLifetime = 1f;
+
                 }
             }
         }
@@ -175,7 +182,7 @@ public class CastPoint : MonoBehaviour
     void OnDrawGizmos()
     {
         //Draw points in cache
-        Vector3 offsetV1 = new Vector3(0.2f, 0, 0f);
+        Vector3 offsetV1 = new Vector3(3f, 0, 0f);
         for (int p = 0; p < pointCache.Count - 1; p++)
         {
             Gizmos.color = Color.yellow;
@@ -185,7 +192,7 @@ public class CastPoint : MonoBehaviour
         }
 
         //Draw points of interest
-        Vector3 offsetV2 = new Vector3(0, 0.2f, 0f);
+        Vector3 offsetV2 = new Vector3(2f, 0f, 0f);
         for (int p = 0; p < pointsOfInterest.Count - 1; p++)
         {
             Gizmos.color = Color.red;
@@ -195,7 +202,7 @@ public class CastPoint : MonoBehaviour
         }
 
         //Draw last points of interest
-        Vector3 offsetV3 = new Vector3(-0.2f, 0, 0f);
+        Vector3 offsetV3 = new Vector3(1f, 0, 0f);
         for (int p = 0; p < lastPointsOfInterest.Count - 1; p++)
         {
             Gizmos.color = Color.blue;

@@ -746,7 +746,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: f668093fe0bfa6046ad1b837f1f7eada, type: 3}
 --- !u!4 &707665736 stripped
 Transform:
@@ -1286,7 +1287,6 @@ MonoBehaviour:
     type: 3}
   castableSpells:
   - {fileID: 11400000, guid: e73ce37a292296e41912da9cd035a105, type: 2}
-  trainingMode: 0
   debugRunes: 0
 --- !u!114 &2701879416592438532
 MonoBehaviour:
@@ -1300,5 +1300,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bb182891f88cb94bbdb4ccdb2bf03c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ghostSphere: {fileID: 1147379969648097800, guid: 2a86fff7434a6404ca459c7091335944,
-    type: 3}

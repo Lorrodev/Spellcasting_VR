@@ -7792,5 +7792,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: ViveTracker
       objectReference: {fileID: 0}
+    - target: {fileID: 8840164360473606186, guid: 29af810e3f85cc74882c104e73d6b858,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: 8840164360473606186, guid: 29af810e3f85cc74882c104e73d6b858,
+        type: 3}
+      propertyPath: m_Parameters.colorGradient.ctime0
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8840164360473606186, guid: 29af810e3f85cc74882c104e73d6b858,
+        type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8840164360473606186, guid: 29af810e3f85cc74882c104e73d6b858,
+        type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.g
+      value: 0.9753064
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 29af810e3f85cc74882c104e73d6b858, type: 3}
