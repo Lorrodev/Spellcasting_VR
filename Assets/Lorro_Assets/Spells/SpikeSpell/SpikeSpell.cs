@@ -39,7 +39,7 @@ public class SpikeSpell : Spell
         }
     }
 
-    public override void Execute()
+    public override void Execute(CastInfo castInfo)
     {
         Camera cam = Camera.main;
         transform.position = new Vector3(cam.transform.position.x, 0, cam.transform.position.z);

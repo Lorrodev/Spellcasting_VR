@@ -4,5 +4,5 @@ using UnityEngine;
 
 public abstract class Spell : MonoBehaviour
 {
-    public abstract void Execute();
+    public abstract void Execute(CastInfo castInfo);
 }

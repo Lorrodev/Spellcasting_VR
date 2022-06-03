@@ -93,7 +93,7 @@ public class LightningSpell : Spell
         Destroy(gameObject);
     }
 
-    public override void Execute()
+    public override void Execute(CastInfo castInfo)
     {
         aEW = Instantiate(aimEffectWand, transform);
         aEW.transform.position = cp.transform.position;

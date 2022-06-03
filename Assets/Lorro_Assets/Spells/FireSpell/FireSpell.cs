@@ -76,7 +76,7 @@ public class FireSpell : Spell
         }
     }
 
-    public override void Execute()
+    public override void Execute(CastInfo castInfo)
     {
         transform.position = cp.transform.position;
 

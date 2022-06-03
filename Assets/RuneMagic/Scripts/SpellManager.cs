@@ -18,6 +18,8 @@ public class SpellManager : MonoBehaviour
     [SerializeField]
     private bool debugRunes;
 
+    private 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,6 +37,8 @@ public class SpellManager : MonoBehaviour
 
     private void CheckRune()
     {
+        CastInfo castInfo = new CastInfo();
+
         List<Vector3> suspectPoints = castPoint.getPossibleRunePoints();
 
         //The spell that the user probably wanted to cast
@@ -63,6 +67,7 @@ public class SpellManager : MonoBehaviour
                 Rune castableRune = rune.GetComponent<Rune>();
 
                 float scaleFactor = suspectRune.GetSize() / castableRune.GetSize();
+                float speedFactor = (float)castableRune.GetRunePoints().Count / (float)suspectPoints.Count;
 
                 castableRune.FitToRune(suspectRune);
                 float delta = castableRune.GetDeltaToRune(suspectRune);
@@ -77,6 +82,12 @@ public class SpellManager : MonoBehaviour
                         mostLikelyToCastSpellDelta = delta;
                         mostLikelyToCastSpell = castableSpell;
                         Debug.Log("Might be " + castableSpell.name + " from " + castableRune.gameObject.name + " | Delta: " + mostLikelyToCastSpellDelta);
+
+                        castInfo.SetCastPoint(castPoint);
+                        castInfo.SetRune(suspectRune);
+                        castInfo.SetScaleFactor(scaleFactor);
+                        castInfo.SetSpeedFactor(speedFactor);
+                        castInfo.SetDelta(delta);
                     }
                 }
             }
@@ -95,7 +106,7 @@ public class SpellManager : MonoBehaviour
             //Instantiate spell and execute
             GameObject spellObject = Instantiate(mostLikelyToCastSpell.GetSpellScriptObject(), activeSpells.transform);
             Spell spell = spellObject.GetComponent<Spell>();
-            spell.Execute();
+            spell.Execute(castInfo);
         }
         else
         {
