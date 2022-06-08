@@ -10,12 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1ff184b298feaf2478d0272744c2db2f, type: 3}
-  m_Name: DemoSpell
+  m_Name: DemoSpellContainer
   m_EditorClassIdentifier: 
   spellName: Demo Spell
   runes:
-  - {fileID: 4207776528825659722, guid: f9bc93c83362cf24fb8667d1618326b8, type: 3}
-  - {fileID: 8229904445287961516, guid: 0151995b45e683944af3dc021926c1a8, type: 3}
-  - {fileID: 8520401482184856681, guid: 5b5b7785a9231d74b9c1db75e8eae24e, type: 3}
-  spellScriptObject: {fileID: 2123360791717689906, guid: 85c608b59b47452459837eea2c48e7dd,
-    type: 3}
+  - {fileID: 9180666749536910281, guid: f9bc93c83362cf24fb8667d1618326b8, type: 3}
+  - {fileID: 6245185077919647400, guid: 0151995b45e683944af3dc021926c1a8, type: 3}
+  - {fileID: 5790641021575099150, guid: 5b5b7785a9231d74b9c1db75e8eae24e, type: 3}
+  spell: {fileID: -6613997222278768567, guid: 85c608b59b47452459837eea2c48e7dd, type: 3}

@@ -10,12 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1ff184b298feaf2478d0272744c2db2f, type: 3}
-  m_Name: FireSpell
+  m_Name: FireSpellContainer
   m_EditorClassIdentifier: 
   spellName: FireSpell
   runes:
-  - {fileID: 8468912214903433560, guid: 40ffcd116a7b3c84cb17a87d0ce1a8e2, type: 3}
-  - {fileID: 5538204462997709230, guid: 8cd12ebcd7082a9479e5a234586f05e6, type: 3}
-  - {fileID: 6356238238406008995, guid: 63ee910d206653041a4edac52827288e, type: 3}
-  spellScriptObject: {fileID: 4671413680861472010, guid: 0d9d7b307798e0b4384cecfb377de683,
-    type: 3}
+  - {fileID: 3497853784053982171, guid: 40ffcd116a7b3c84cb17a87d0ce1a8e2, type: 3}
+  - {fileID: 7513837466307179690, guid: 8cd12ebcd7082a9479e5a234586f05e6, type: 3}
+  - {fileID: 9103767527903659972, guid: 63ee910d206653041a4edac52827288e, type: 3}
+  spell: {fileID: 5467435102052293250, guid: 0d9d7b307798e0b4384cecfb377de683, type: 3}

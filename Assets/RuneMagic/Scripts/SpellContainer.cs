@@ -3,22 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "newSpellObject", menuName = "Spell Object (RuneMagic)")]
-public class SpellObject : ScriptableObject
+public class SpellContainer : ScriptableObject
 {
     [SerializeField]
     private string spellName;
     [SerializeField]
-    private List<GameObject> runes;
+    private List<Rune> runes;
     [SerializeField]
-    private GameObject spellScriptObject;
+    private Spell spell;
 
-    public List<GameObject> GetRunes()
+    public List<Rune> GetRunes()
     {
-        return new List<GameObject>(runes);
+        return new List<Rune>(runes);
     }
 
-    public GameObject GetSpellScriptObject()
+    public Spell GetSpell()
     {
-        return spellScriptObject;
+        return spell;
     }
 }

@@ -5,7 +5,6 @@ using UnityEngine;
 public class SpellManager : MonoBehaviour
 {
     [SerializeField]
-    private GameObject castPointObject;
     private CastPoint castPoint;
 
     [SerializeField]
@@ -13,18 +12,10 @@ public class SpellManager : MonoBehaviour
     [SerializeField]
     private Rune emptyRune;
     [SerializeField]
-    private List<SpellObject> castableSpells;
+    private List<SpellContainer> castableSpells;
 
     [SerializeField]
     private bool debugRunes;
-
-    private 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        castPoint = castPointObject.GetComponent<CastPoint>();
-    }
 
     // Update is called once per frame
     void Update()
@@ -42,7 +33,7 @@ public class SpellManager : MonoBehaviour
         List<Vector3> suspectPoints = castPoint.getPossibleRunePoints();
 
         //The spell that the user probably wanted to cast
-        SpellObject mostLikelyToCastSpell = null;
+        SpellContainer mostLikelyToCastSpell = null;
 
         //The gap to the delta threshold that is needed to cast the spell sucessfully (= certainty that user means this spell)
         //float mostLikelyToCastSpellGapToDeltaThreshold = 0f;
@@ -57,13 +48,13 @@ public class SpellManager : MonoBehaviour
 
         for (int c = 0; c < castableSpells.Count; c++)
         {
-            SpellObject castableSpell = castableSpells[c];
+            SpellContainer castableSpell = castableSpells[c];
             //Debug.Log("=================== " + castableSpell.name + " ========================");
 
-            List<GameObject> castableSpellRunes = castableSpell.GetRunes();
+            List<Rune> castableSpellRunes = castableSpell.GetRunes();
             for (int r = 0; r < castableSpellRunes.Count; r++)
             {
-                GameObject rune = Instantiate(castableSpellRunes[r], runeContainer.transform);
+                GameObject rune = Instantiate(castableSpellRunes[r].gameObject, runeContainer.transform);
                 Rune castableRune = rune.GetComponent<Rune>();
 
                 float scaleFactor = suspectRune.GetSize() / castableRune.GetSize();
@@ -104,8 +95,8 @@ public class SpellManager : MonoBehaviour
             }
 
             //Instantiate spell and execute
-            GameObject spellObject = Instantiate(mostLikelyToCastSpell.GetSpellScriptObject(), activeSpells.transform);
-            Spell spell = spellObject.GetComponent<Spell>();
+            GameObject spellGameObject = Instantiate(mostLikelyToCastSpell.GetSpell().gameObject, activeSpells.transform);
+            Spell spell = spellGameObject.GetComponent<Spell>();
             spell.Execute(castInfo);
         }
         else
@@ -124,9 +115,9 @@ public class SpellManager : MonoBehaviour
         }
     }
 
-    public GameObject GetCastPoint()
+    public CastPoint GetCastPoint()
     {
-        return castPoint.gameObject;
+        return castPoint;
     }
 
     public Rune GetEmptyRune()

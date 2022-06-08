@@ -27,7 +27,6 @@ public class LightningSpell : Spell
     {
         ac = GetComponent<AudioSource>();
         sm = GameObject.Find("SpellManager").GetComponent<SpellManager>();
-        cp = sm.GetCastPoint();
     }
 
     private void OnEnable()
@@ -95,6 +94,8 @@ public class LightningSpell : Spell
 
     public override void Execute(CastInfo castInfo)
     {
+        cp = castInfo.GetCastPoint().gameObject;
+
         aEW = Instantiate(aimEffectWand, transform);
         aEW.transform.position = cp.transform.position;
         aEW.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);

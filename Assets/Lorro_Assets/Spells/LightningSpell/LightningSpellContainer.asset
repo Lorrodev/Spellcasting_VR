@@ -10,11 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1ff184b298feaf2478d0272744c2db2f, type: 3}
-  m_Name: LightningSpell
+  m_Name: LightningSpellContainer
   m_EditorClassIdentifier: 
   spellName: Lightning Spell
   runes:
-  - {fileID: 2024105689238880164, guid: 0950d111f1f6bb34db0e885911e3c461, type: 3}
-  - {fileID: 6387344803750042159, guid: 7d5eb7b0a659fdd419cf71f04e538e56, type: 3}
-  spellScriptObject: {fileID: 1197939578098623589, guid: 1225bf4ce247269419e3cae1e325ffa6,
-    type: 3}
+  - {fileID: 9099379163505589840, guid: 0950d111f1f6bb34db0e885911e3c461, type: 3}
+  - {fileID: 6909987527047686394, guid: 7d5eb7b0a659fdd419cf71f04e538e56, type: 3}
+  spell: {fileID: 3209001532087820316, guid: 1225bf4ce247269419e3cae1e325ffa6, type: 3}

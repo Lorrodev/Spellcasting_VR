@@ -10,12 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1ff184b298feaf2478d0272744c2db2f, type: 3}
-  m_Name: SpikeSpell
+  m_Name: SpikeSpellContainer
   m_EditorClassIdentifier: 
   spellName: Spike Spell
   runes:
-  - {fileID: 4801663980566458777, guid: 2b293e50db8ce7d4ea520d40a88d249e, type: 3}
-  - {fileID: 4994618256467387117, guid: 270ffeceb499c30439882ba129285491, type: 3}
-  - {fileID: 2916212228462483631, guid: 28d0bae2cab1c8948b24bd25321141e2, type: 3}
-  spellScriptObject: {fileID: 8848971194250734215, guid: 24562b2e409c076488da12292db599c2,
-    type: 3}
+  - {fileID: 3094122288667563114, guid: 2b293e50db8ce7d4ea520d40a88d249e, type: 3}
+  - {fileID: 8432076268171077879, guid: 270ffeceb499c30439882ba129285491, type: 3}
+  - {fileID: 101397271264534949, guid: 28d0bae2cab1c8948b24bd25321141e2, type: 3}
+  spell: {fileID: -6029492047698114252, guid: 24562b2e409c076488da12292db599c2, type: 3}

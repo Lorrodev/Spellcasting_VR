@@ -37,7 +37,6 @@ public class FireSpell : Spell
         sc.isTrigger = true;
 
         sm = GameObject.Find("SpellManager").GetComponent<SpellManager>();
-        cp = sm.GetCastPoint();
     }
 
     private void OnEnable()
@@ -78,6 +77,8 @@ public class FireSpell : Spell
 
     public override void Execute(CastInfo castInfo)
     {
+        cp = castInfo.GetCastPoint().gameObject;
+
         transform.position = cp.transform.position;
 
         ac.PlayOneShot(flightSound);

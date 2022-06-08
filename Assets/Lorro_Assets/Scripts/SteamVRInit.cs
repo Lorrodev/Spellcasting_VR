@@ -10,7 +10,7 @@ public class SteamVRInit : MonoBehaviour
 
     private float lastRefresh = 0f;
 
-    //Modified version of file: https://gist.github.com/hon454/83b54708ee066e44af4d0b68a6862f02
+    //Modified version of file: https://gist.github.com/hon454/57ba590a4f3f33d6172f9c1d7f60ad32
     private void Start()
     {
         GetController();
@@ -46,7 +46,7 @@ public class SteamVRInit : MonoBehaviour
                 trackerIndex = (SteamVR_TrackedObject.EIndex)i;
                 trackerFound = true;
             }
-            else if (type.ToString().Contains("controller"))
+            else if (type.ToString().Contains("controller") && active.ToString().Contains("UserInteraction"))
             {
                 fallbackControllerIndex = (SteamVR_TrackedObject.EIndex)i;
             }

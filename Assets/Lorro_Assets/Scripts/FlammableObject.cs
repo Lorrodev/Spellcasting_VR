@@ -36,7 +36,6 @@ public class FlammableObject : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.tag);
         if (other.CompareTag("Fire") || other.CompareTag("Lightning"))
         {
             fire.SetActive(true);

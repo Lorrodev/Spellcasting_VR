@@ -755,12 +755,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 707665735}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &707665737 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 525454955082332301, guid: f668093fe0bfa6046ad1b837f1f7eada,
+--- !u!114 &707665737 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3428172171459112818, guid: f668093fe0bfa6046ad1b837f1f7eada,
     type: 3}
   m_PrefabInstance: {fileID: 707665735}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce1adbcf6734770488e5ede5d81be93f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &717524994
 GameObject:
   m_ObjectHideFlags: 0
@@ -1246,7 +1252,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2701879416592438530}
   - component: {fileID: 2701879416592438531}
-  - component: {fileID: 2701879416592438532}
   m_Layer: 0
   m_Name: SpellManager
   m_TagString: Untagged
@@ -1281,22 +1286,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0672984a1603e3349b8d76a1b9cc01b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  castPointObject: {fileID: 707665737}
+  castPoint: {fileID: 707665737}
   recordRunes: 0
   emptyRune: {fileID: 6261320631332944931, guid: 76406fa88ca15384baf06ced1a944f27,
     type: 3}
   castableSpells:
   - {fileID: 11400000, guid: e73ce37a292296e41912da9cd035a105, type: 2}
   debugRunes: 0
---- !u!114 &2701879416592438532
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2701879416592438528}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6bb182891f88cb94bbdb4ccdb2bf03c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

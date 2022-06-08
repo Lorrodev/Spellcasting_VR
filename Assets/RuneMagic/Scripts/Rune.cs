@@ -14,20 +14,10 @@ public class Rune : MonoBehaviour
 
     private Dictionary<string, Vector3> corners;
 
-    private Transform ps;
-
     // Start is called before the first frame update
     void Start()
     {
         UpdatePoints();
-        ps = transform.Find("ParticleSystem");
-        ps.GetComponent<ParticleSystem>().Stop();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     public void Center()
@@ -122,7 +112,7 @@ public class Rune : MonoBehaviour
         //Rotate
         Quaternion rotation;
 
-        GameObject castPoint = GameObject.Find("SpellManager").GetComponent<SpellManager>().GetCastPoint();
+        CastPoint castPoint = GameObject.Find("SpellManager").GetComponent<SpellManager>().GetCastPoint();
 
         if (!IsUseCameraForwardToAlign())
         {
@@ -246,29 +236,6 @@ public class Rune : MonoBehaviour
         //Debug.Log("Delta for " + gameObject.name + " is " + delta + " / threshold is : " + GetDeltaThreshold());
 
         return delta;
-    }
-
-    public IEnumerator Animate()
-    {
-        List<Vector3> worldPoints = getWorldPoints();
-
-        if (worldPoints.Count > 0)
-        {
-            ps.position = worldPoints[0];
-            ps.GetComponent<ParticleSystem>().Play();
-            for (int i = 1; i < worldPoints.Count; i++)
-            {
-                Vector3 vect = worldPoints[i] - ps.position;
-                while (vect.magnitude > 0.01f)
-                {
-                    ps.position += vect * Time.deltaTime * 30f;
-                    vect = worldPoints[i] - ps.position;
-                    yield return null;
-                }
-            }
-        }
-
-        ps.GetComponent<ParticleSystem>().Stop();
     }
 
     private void OnDrawGizmos()

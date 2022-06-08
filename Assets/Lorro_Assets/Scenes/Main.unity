@@ -1259,12 +1259,18 @@ MonoBehaviour:
   byLightning: 1
   byEarth: 1
   respawnTime: 20
---- !u!1 &1002554408 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7389495124633760960, guid: 29af810e3f85cc74882c104e73d6b858,
+--- !u!114 &1002554412 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5644515257403777855, guid: 29af810e3f85cc74882c104e73d6b858,
     type: 3}
   m_PrefabInstance: {fileID: 8025933130915490355}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce1adbcf6734770488e5ede5d81be93f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1011478511
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2518,7 +2524,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0672984a1603e3349b8d76a1b9cc01b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  castPointObject: {fileID: 1002554408}
+  castPoint: {fileID: 1002554412}
   recordRunes: 0
   emptyRune: {fileID: 6261320631332944931, guid: 76406fa88ca15384baf06ced1a944f27,
     type: 3}
@@ -3605,6 +3611,7 @@ GameObject:
   - component: {fileID: 33943790148640870}
   - component: {fileID: 23414630301191226}
   - component: {fileID: 64265605224810520}
+  - component: {fileID: 64265605224810521}
   m_Layer: 0
   m_Name: SM_Tree_Stump_01
   m_TagString: Untagged
@@ -8563,6 +8570,22 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 6d6cd06c2176aab46a6da9dd4e1f83e9, type: 3}
+--- !u!114 &64265605224810521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1552408965032068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65d10e58a9af0eb45ad847a7b92c6980, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  byFire: 0
+  byLightning: 0
+  byEarth: 1
+  respawnTime: 20
 --- !u!64 &64292738144012436
 MeshCollider:
   m_ObjectHideFlags: 0
