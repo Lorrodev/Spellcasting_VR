@@ -46,7 +46,7 @@ public class SteamVRInit : MonoBehaviour
                 trackerIndex = (SteamVR_TrackedObject.EIndex)i;
                 trackerFound = true;
             }
-            else if (type.ToString().Contains("controller") && active.ToString().Contains("UserInteraction"))
+            else if ((type.ToString().Contains("controller") || type.ToString().Contains("knuckles")) && active.ToString().Contains("UserInteraction"))
             {
                 fallbackControllerIndex = (SteamVR_TrackedObject.EIndex)i;
             }
