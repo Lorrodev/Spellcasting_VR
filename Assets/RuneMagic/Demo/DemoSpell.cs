@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DemoSpellScript : Spell
+public class DemoSpell : Spell
 {
     private float TTL = 2f;
 

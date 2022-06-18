@@ -21,4 +21,9 @@ public class SpellContainer : ScriptableObject
     {
         return spell;
     }
+
+    public string GetSpellName()
+    {
+        return spellName;
+    }
 }

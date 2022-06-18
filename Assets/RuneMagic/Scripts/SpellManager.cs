@@ -72,7 +72,7 @@ public class SpellManager : MonoBehaviour
                     {
                         mostLikelyToCastSpellDelta = delta;
                         mostLikelyToCastSpell = castableSpell;
-                        Debug.Log("Might be " + castableSpell.name + " from " + castableRune.gameObject.name + " | Delta: " + mostLikelyToCastSpellDelta);
+                        Debug.Log("Might be " + castableSpell.GetSpellName() + " from " + castableRune.gameObject.name + " | Delta: " + mostLikelyToCastSpellDelta);
 
                         castInfo.SetCastPoint(castPoint);
                         castInfo.SetRune(suspectRune);
